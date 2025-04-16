@@ -75,13 +75,7 @@ extension QueryFormView {
             isSheetPresented = true
         } label: {
             Text("Hoď to sem")
-                .font(.title2)
-                .foregroundStyle(.white)
-                .padding()
-                .frame(maxWidth: .infinity)
-                .background {
-                    RoundedRectangle(cornerRadius: 16)
-                }
+                .primaryButtonStyle()
         }
         .padding(.bottom)
     }
