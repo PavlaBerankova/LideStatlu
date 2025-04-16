@@ -11,13 +11,20 @@ struct QueryFormView: View {
     @Environment(\.presentationMode)
     var presentationMode
     @State private var isSheetPresented = false
+    @State private var userAge: Int = 30
+    @State private var userHome: String = "Zakřany"
+    @State private var testArea = ["Zakřany", "Rosice", "Zbýšov", "Nový Lískovec", "Líšeň"]
 
     var body: some View {
         NavigationStack {
-            VStack {
-                queryForm
+            Form {
+                ageSection
+                urbanAreaSection
+            }
+            VStack(alignment: .leading) {
                 showDataResultButton
             }
+            .padding(.horizontal)
             .sheet(isPresented: $isSheetPresented) {
                 DataResultView(isSheetPresented: $isSheetPresented)
             }
@@ -25,12 +32,42 @@ struct QueryFormView: View {
                 dismissButton
             }
         }
+        .navigationTitle("Lidé Štatlu")
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 
 extension QueryFormView {
-    private var queryForm: some View {
-        Text("Formulář pro uživatele")
+    private var ageSection: some View {
+        Section {
+            Picker("Věk", selection: $userAge) {
+                ForEach(0...100, id: \.self) {
+                    Text("\($0)")
+                }
+            }
+            .pickerStyle(.automatic)
+        } header: {
+            Text("Kolik ti je?")
+                .font(.title2)
+                .bold()
+                .foregroundStyle(.black)
+        }
+    }
+
+    private var urbanAreaSection: some View {
+        Section {
+            Picker("Oblast", selection: $userHome) {
+                ForEach(testArea, id: \.self) { area in
+                    Text(area)
+                }
+            }
+            .pickerStyle(.menu)
+        } header: {
+            Text("Kde býváš?")
+                .font(.title2)
+                .bold()
+                .foregroundStyle(.black)
+        }
     }
 
     private var showDataResultButton: some View {
@@ -38,7 +75,15 @@ extension QueryFormView {
             isSheetPresented = true
         } label: {
             Text("Hoď to sem")
+                .font(.title2)
+                .foregroundStyle(.white)
+                .padding()
+                .frame(maxWidth: .infinity)
+                .background {
+                    RoundedRectangle(cornerRadius: 16)
+                }
         }
+        .padding(.bottom)
     }
 
     private var dismissButton: some ToolbarContent {
