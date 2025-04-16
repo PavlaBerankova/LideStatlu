@@ -9,9 +9,9 @@ import SwiftUI
 
 struct MainView: View {
     @State private var isPressed = false
+    @State private var isPresented = false
 
     var body: some View {
-        NavigationStack {
             VStack(alignment: .leading) {
                 logoBrno
                 appName
@@ -19,7 +19,7 @@ struct MainView: View {
                 nextScreenButton
             }
             .padding()
-        }
+            .fullScreenCover(isPresented: $isPresented, content: QueryFormView.init)
     }
 }
 
@@ -50,8 +50,8 @@ extension MainView {
     }
 
     private var nextScreenButton: some View {
-        NavigationLink {
-            QueryFormView()
+        Button {
+            isPresented.toggle()
         } label: {
             Text("Hoď na to čučku")
                 .font(.title2)
