@@ -42,7 +42,7 @@ extension MainView {
     }
 
     private var appDescription: some View {
-        Text("Zjisti, kdo kolem tebe žije.\nKolik vrstevníků je ve tvé čtvrti. Mrkni na statistiky podle věku a poměr mužů a žen pro každou část Brna. ")
+        Text("Zjisti, kdo kolem tebe žije.\nKolik vrstevníků je ve tvé obci. Mrkni na statistiky podle věku nebo poměr mužů a žen pro obce v metropolitní oblasti Brna. ")
             .font(.title3)
             .padding(.top)
             .foregroundStyle(.black.opacity(0.8))
@@ -53,7 +53,7 @@ extension MainView {
         Button {
             isPresented.toggle()
         } label: {
-            Text("Hoď na to čučku")
+            Text("Pojďme na to")
                 .primaryButtonStyle()
                 .scaleEffect(isPressed ? 0.95 : 1.0)
                        .animation(.easeOut(duration: 0.2), value: isPressed)

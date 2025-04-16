@@ -12,14 +12,14 @@ struct QueryFormView: View {
     var presentationMode
     @State private var isSheetPresented = false
     @State private var userAge: Int = 30
-    @State private var userHome: String = "Zakřany"
+    @State private var userMunicipality: String = "Zakřany"
     @State private var testArea = ["Zakřany", "Rosice", "Zbýšov", "Nový Lískovec", "Líšeň"]
 
     var body: some View {
         NavigationStack {
             Form {
                 ageSection
-                urbanAreaSection
+                municipalitySection
             }
             VStack(alignment: .leading) {
                 showDataResultButton
@@ -54,9 +54,9 @@ extension QueryFormView {
         }
     }
 
-    private var urbanAreaSection: some View {
+    private var municipalitySection: some View {
         Section {
-            Picker("Oblast", selection: $userHome) {
+            Picker("Obec", selection: $userMunicipality) {
                 ForEach(testArea, id: \.self) { area in
                     Text(area)
                 }
@@ -74,7 +74,7 @@ extension QueryFormView {
         Button {
             isSheetPresented = true
         } label: {
-            Text("Hoď to sem")
+            Text("Hoď na to čučku")
                 .primaryButtonStyle()
         }
         .padding(.bottom)
