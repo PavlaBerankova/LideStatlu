@@ -51,7 +51,7 @@ extension MainView {
 
     private var nextScreenButton: some View {
         Button {
-            isPresented.toggle()
+            isPresented = true
         } label: {
             Text("Pojďme na to")
                 .primaryButtonStyle()
@@ -67,5 +67,7 @@ extension MainView {
 }
 
 #Preview {
-    MainView()
+    NavigationStack {
+        MainView()
+    }
 }

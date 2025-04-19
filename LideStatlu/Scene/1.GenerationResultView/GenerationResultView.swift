@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct GenerationResultView: View {
-    @State private var mockData: [AgeStructure] = AgeStructure.mock
+    @StateObject var state = GenerationResultViewModel()
 
     var body: some View {
         VStack {
@@ -17,6 +17,10 @@ struct GenerationResultView: View {
             userAgeGroupPopulation
         }
         .padding(.horizontal)
+        .task {
+            try? await state.loadData()
+            print(state.ageStructures)
+        }
     }
 }
 
@@ -31,8 +35,8 @@ extension GenerationResultView {
 
     private var userLocalityTotalPopulation: some View {
         ResultRowView(
-            title: "V obci \(mockData.first!.localityName) žije celkem",
-            result: "\(mockData.first!.totalPopulation!) obyvatel",
+            title: "V obci \(state.ageStructures.first?.attributes.localityName ?? "Unknown") žije celkem",
+            result: "\(state.ageStructures.first?.attributes.totalPopulation ?? 00) obyvatel",
             subTitle: nil
         )
     }
@@ -40,8 +44,8 @@ extension GenerationResultView {
     private var userAgeGroupPopulation: some View {
         ResultRowView(
             title: "Z toho je ve tvém věku",
-            result: "\(mockData.first!.age30to34!) obyvatel",
-            subTitle: "\(mockData.first!.age30to34Title)"
+            result: "\(state.ageStructures.first?.attributes.age30to34 ?? 00) obyvatel",
+            subTitle: "30-34"
         )
     }
 }

@@ -8,8 +8,8 @@
 import Foundation
 
 extension AgeProfile {
-    static let mock: [AgeProfile] = [
-        AgeProfile(
+    static let mock: [AgeProfileAttributes] = [
+        AgeProfileAttributes(
             id: 172,
             localityCode: "583782",
             localityName: "Rosice",
@@ -29,7 +29,7 @@ extension AgeProfile {
             femaleAgeGroup15to64: 2_122,
             femaleAgeGroup65plus: 687
         ),
-        AgeProfile(
+        AgeProfileAttributes(
             id: 184,
             localityCode: "582786",
             localityName: "Brno",
@@ -49,7 +49,7 @@ extension AgeProfile {
             femaleAgeGroup15to64: 127_318,
             femaleAgeGroup65plus: 48_660
         ),
-        AgeProfile(
+        AgeProfileAttributes(
             id: 77,
             localityCode: "583481",
             localityName: "Neslovice",

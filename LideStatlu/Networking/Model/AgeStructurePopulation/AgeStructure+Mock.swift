@@ -8,8 +8,8 @@
 import Foundation
 
 extension AgeStructure {
-    static let mock: [AgeStructure] = [
-        AgeStructure(
+    static let mock: [AgeStructAttributes] = [
+        AgeStructAttributes(
             id: 172,
             localityCode: "583782",
             localityName: "Rosice",
@@ -35,7 +35,7 @@ extension AgeStructure {
             age90plus: 34,
             ageIndex: 86.661698956780924
         ),
-        AgeStructure(
+        AgeStructAttributes(
             id: 184,
             localityCode: "582786",
             localityName: "Brno",
@@ -61,7 +61,7 @@ extension AgeStructure {
             age90plus: 3_400,
             ageIndex: 130.78114768498554
         ),
-        AgeStructure(
+        AgeStructAttributes(
             id: 77,
             localityCode: "583481",
             localityName: "Neslovice",
