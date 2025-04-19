@@ -8,8 +8,41 @@
 import SwiftUI
 
 struct GenerationResultView: View {
+    @State private var mockData: [AgeStructure] = AgeStructure.mock
+
     var body: some View {
-        Text("Tvoje generace")
+        VStack {
+            userGeneration
+            userLocalityTotalPopulation
+            userAgeGroupPopulation
+        }
+        .padding(.horizontal)
+    }
+}
+
+extension GenerationResultView {
+    private var userGeneration: some View {
+        ResultRowView(
+            title: "Patříš do generace",
+            result: "Mileniál",
+            subTitle: "(1980-1997)"
+        )
+    }
+
+    private var userLocalityTotalPopulation: some View {
+        ResultRowView(
+            title: "V obci \(mockData.first!.localityName) žije celkem",
+            result: "\(mockData.first!.totalPopulation!) obyvatel",
+            subTitle: nil
+        )
+    }
+
+    private var userAgeGroupPopulation: some View {
+        ResultRowView(
+            title: "Z toho je ve tvém věku",
+            result: "\(mockData.first!.age30to34!) obyvatel",
+            subTitle: "30-34 let"
+        )
     }
 }
 
