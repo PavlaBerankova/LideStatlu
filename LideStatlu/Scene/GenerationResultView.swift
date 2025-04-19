@@ -41,7 +41,7 @@ extension GenerationResultView {
         ResultRowView(
             title: "Z toho je ve tvém věku",
             result: "\(mockData.first!.age30to34!) obyvatel",
-            subTitle: "30-34 let"
+            subTitle: "\(mockData.first!.age30to34Title)"
         )
     }
 }

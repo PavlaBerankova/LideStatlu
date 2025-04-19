@@ -62,3 +62,25 @@ struct AgeStructure: Codable {
         case ageIndex = "Index_stáří"
     }
 }
+
+extension AgeStructure {
+    var age0to4Title: String { "0–4 roky" }
+    var age5to9Title: String { "5–9 let" }
+    var age10to14Title: String { "10–14 let" }
+    var age15to19Title: String { "15–19 let" }
+    var age20to24Title: String { "20–24 let" }
+    var age25to29Title: String { "25–29 let" }
+    var age30to34Title: String { "30–34 let" }
+    var age35to39Title: String { "35–39 let" }
+    var age40to44Title: String { "40–44 let" }
+    var age45to49Title: String { "45–49 let" }
+    var age50to54Title: String { "50–54 let" }
+    var age55to59Title: String { "55–59 let" }
+    var age60to64Title: String { "60–64 let" }
+    var age65to69Title: String { "65–69 let" }
+    var age70to74Title: String { "70–74 let" }
+    var age75to79Title: String { "75–79 let" }
+    var age80to84Title: String { "80–84 let" }
+    var age85to89Title: String { "85–89 let" }
+    var age90plusTitle: String { "90 a více let" }
+}
