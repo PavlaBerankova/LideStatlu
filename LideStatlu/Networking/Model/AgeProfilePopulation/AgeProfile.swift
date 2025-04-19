@@ -9,31 +9,33 @@ import Foundation
 
 struct AgeProfile: Codable {
     let id: Int
+    let localityCode: String
     let localityName: String
 
     // All population
-    let totalPopulation: Int
-    let averageAge: Double
-    let ageGroup0to14: Int
-    let ageGroup15to64: Int
-    let ageGroup65plus: Int
+    let totalPopulation: Int?
+    let averageAge: Double?
+    let ageGroup0to14: Int?
+    let ageGroup15to64: Int?
+    let ageGroup65plus: Int?
 
     // Male population
-    let malePopulation: Int
-    let maleAverageAge: Double
-    let maleAgeGroup0to14: Int
-    let maleAgeGroup15to64: Int
-    let maleAgeGroup65plus: Int
+    let malePopulation: Int?
+    let maleAverageAge: Double?
+    let maleAgeGroup0to14: Int?
+    let maleAgeGroup15to64: Int?
+    let maleAgeGroup65plus: Int?
 
     // Female population
-    let femalePopulation: Int
-    let femaleAverageAge: Double
-    let femaleAgeGroup0to14: Int
-    let femaleAgeGroup15to64: Int
-    let femaleAgeGroup65plus: Int
+    let femalePopulation: Int?
+    let femaleAverageAge: Double?
+    let femaleAgeGroup0to14: Int?
+    let femaleAgeGroup15to64: Int?
+    let femaleAgeGroup65plus: Int?
 
     enum CodingKeys: String, CodingKey {
         case id = "OBJECTID"
+        case localityCode = "KOD_OBEC"
         case localityName = "NAZ_OBEC"
 
         // All population

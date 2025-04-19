@@ -9,6 +9,7 @@ import Foundation
 
 struct AgeStructure: Codable {
     let id: Int
+    let localityCode: String
     let localityName: String
     let totalPopulation: Int?
 
@@ -35,6 +36,7 @@ struct AgeStructure: Codable {
 
     enum CodingKeys: String, CodingKey {
         case id = "OBJECTID_1"
+        case localityCode = "KOD_OBEC"
         case localityName = "NAZ_OBEC"
         case totalPopulation = "Celkem"
 
