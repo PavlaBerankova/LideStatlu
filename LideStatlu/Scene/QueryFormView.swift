@@ -11,7 +11,7 @@ struct QueryFormView: View {
     @Environment(\.presentationMode)
     var presentationMode
     @State private var isSheetPresented = false
-    @State private var userAge: Int = 30
+    @State private var userAge: Int = 2_000
     @State private var userMunicipality: String = "Zakřany"
     @State private var testArea = ["Zakřany", "Rosice", "Zbýšov", "Nový Lískovec", "Líšeň"]
 
@@ -40,14 +40,14 @@ struct QueryFormView: View {
 extension QueryFormView {
     private var ageSection: some View {
         Section {
-            Picker("Věk", selection: $userAge) {
-                ForEach(0...100, id: \.self) {
+            Picker("Rok narození", selection: $userAge) {
+                ForEach(1_920...2_025, id: \.self) {
                     Text("\($0)")
                 }
             }
             .pickerStyle(.automatic)
         } header: {
-            Text("Kolik ti je?")
+            Text("Kdy ses narodil?")
                 .font(.title2)
                 .bold()
                 .foregroundStyle(.black)

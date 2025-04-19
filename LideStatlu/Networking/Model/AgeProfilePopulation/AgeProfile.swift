@@ -1,15 +1,15 @@
 //
-//  Attribute.swift
+//  AgeProfile.swift
 //  LideStatlu
 //
-//  Created by Pavla Beránková on 16.04.2025.
+//  Created by Pavla Beránková on 19.04.2025.
 //
 
 import Foundation
 
-struct Attribute: Codable {
+struct AgeProfile: Codable {
     let id: Int
-    let municipality: String
+    let localityName: String
 
     // All population
     let totalPopulation: Int
@@ -34,7 +34,7 @@ struct Attribute: Codable {
 
     enum CodingKeys: String, CodingKey {
         case id = "OBJECTID"
-        case municipality = "NAZ_OBEC"
+        case localityName = "NAZ_OBEC"
 
         // All population
         case totalPopulation = "Celkem"

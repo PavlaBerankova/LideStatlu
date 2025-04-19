@@ -7,6 +7,6 @@
 
 import Foundation
 
-struct Feature: Codable {
-    let attributes: Attribute
+struct Feature<T: Codable>: Codable {
+    let attributes: T
 }
