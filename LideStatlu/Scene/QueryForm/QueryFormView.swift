@@ -7,56 +7,42 @@
 
 import SwiftUI
 
-struct Locality: Hashable {
-    let name: String
-    let district: String
-}
-
 struct QueryFormView: View {
     @Environment(\.presentationMode)
     var presentationMode
-    @EnvironmentObject var state: GenerationResultViewModel
-    @State private var isSheetPresented = false
-    @State private var userAge: Int = 2_000
-    @State private var selectedLocalityName: Locality = Locality(name: "Brno", district: "Brno-město")
+    @EnvironmentObject var globalState: GenerationResultViewModel
+    @StateObject var queryState = QueryFormViewModel()
 
     var body: some View {
         NavigationStack {
             Form {
-                ageSection
-                municipalitySection
-                Button {
-                    print(state.localityNames)
-                } label: {
-                    Text("Show locality names")
-                }
+                agePickerSection
+                localitySection
             }
             VStack(alignment: .leading) {
                 showDataResultButton
             }
             .padding(.horizontal)
-            .sheet(isPresented: $isSheetPresented) {
-                DataResultView(isSheetPresented: $isSheetPresented)
+            .sheet(isPresented: $queryState.isSheetPresented) {
+                DataResultView(isSheetPresented: $queryState.isSheetPresented)
             }
             .toolbar {
                 dismissButton
             }
         }
-
-        .navigationTitle("Lidé Štatlu")
+        .navigationTitle("Lidé okolo Štatlu")
         .navigationBarTitleDisplayMode(.inline)
     }
 }
 
 extension QueryFormView {
-    private var ageSection: some View {
+    private var agePickerSection: some View {
         Section {
-            Picker("Rok narození", selection: $userAge) {
-                ForEach(1_920...2_025, id: \.self) {
-                    Text("\($0)")
+            Picker("Rok narození", selection: $queryState.userYearofBirth) {
+                ForEach(queryState.years, id: \.self) { year in
+                    Text(String(year))
                 }
             }
-            .pickerStyle(.automatic)
         } header: {
             Text("Kdy ses narodil?")
                 .font(.title2)
@@ -65,10 +51,10 @@ extension QueryFormView {
         }
     }
 
-    private var municipalitySection: some View {
+    private var localitySection: some View {
         Section {
-            Picker("Obec", selection: $selectedLocalityName) {
-                ForEach(state.localityNames, id: \.self) { locality in
+            Picker("Obec", selection: $queryState.selectedLocalityName) {
+                ForEach(globalState.localityNames, id: \.self) { locality in
                     Text("\(locality.name) ") +
                     Text("(okres \(locality.district))")
                         .foregroundColor(.secondary)
@@ -85,7 +71,7 @@ extension QueryFormView {
 
     private var showDataResultButton: some View {
         Button {
-            isSheetPresented = true
+            queryState.isSheetPresented = true
         } label: {
             Text("Hoď na to čučku")
                 .primaryButtonStyle()
@@ -107,5 +93,6 @@ extension QueryFormView {
 #Preview {
     NavigationStack {
         QueryFormView()
+            .environmentObject(GenerationResultViewModel())
     }
 }

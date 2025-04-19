@@ -24,10 +24,7 @@ class GenerationResultViewModel: ObservableObject {
     }
 
     func getLocalityNames() {
-        // let mappedNames = ageStructures.map { $0.attributes.localityName: $0.attributes.district }
         let mappedNames: [Locality] = ageStructures.map { Locality(name: $0.attributes.localityName, district: $0.attributes.district) }
-        // let uniqueNames = Array(Set(mappedNames))
-
         let sortedNames = mappedNames.sorted {
             $0.name.compare($1.name, locale: Locale(identifier: "cs_CZ")) == .orderedAscending // správné řazení podle českého jazyka
         }
