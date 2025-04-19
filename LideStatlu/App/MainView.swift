@@ -10,16 +10,21 @@ import SwiftUI
 struct MainView: View {
     @State private var isPressed = false
     @State private var isPresented = false
+    @EnvironmentObject var state: GenerationResultViewModel
 
     var body: some View {
-            VStack(alignment: .leading) {
-                logoBrno
-                appName
-                appDescription
-                nextScreenButton
-            }
-            .padding()
-            .fullScreenCover(isPresented: $isPresented, content: QueryFormView.init)
+        VStack(alignment: .leading) {
+            logoBrno
+            appName
+            appDescription
+            nextScreenButton
+        }
+        .padding()
+        .fullScreenCover(isPresented: $isPresented, content: QueryFormView.init)
+        .task {
+            try? await state.loadData()
+            state.getLocalityNames()
+        }
     }
 }
 
@@ -69,5 +74,6 @@ extension MainView {
 #Preview {
     NavigationStack {
         MainView()
+            .environmentObject(GenerationResultViewModel())
     }
 }

@@ -7,19 +7,29 @@
 
 import SwiftUI
 
+struct Locality: Hashable {
+    let name: String
+    let district: String
+}
+
 struct QueryFormView: View {
     @Environment(\.presentationMode)
     var presentationMode
+    @EnvironmentObject var state: GenerationResultViewModel
     @State private var isSheetPresented = false
     @State private var userAge: Int = 2_000
-    @State private var userMunicipality: String = "Zakřany"
-    @State private var testArea = ["Zakřany", "Rosice", "Zbýšov", "Nový Lískovec", "Líšeň"]
+    @State private var selectedLocalityName: Locality = Locality(name: "Brno", district: "Brno-město")
 
     var body: some View {
         NavigationStack {
             Form {
                 ageSection
                 municipalitySection
+                Button {
+                    print(state.localityNames)
+                } label: {
+                    Text("Show locality names")
+                }
             }
             VStack(alignment: .leading) {
                 showDataResultButton
@@ -32,6 +42,7 @@ struct QueryFormView: View {
                 dismissButton
             }
         }
+
         .navigationTitle("Lidé Štatlu")
         .navigationBarTitleDisplayMode(.inline)
     }
@@ -56,12 +67,14 @@ extension QueryFormView {
 
     private var municipalitySection: some View {
         Section {
-            Picker("Obec", selection: $userMunicipality) {
-                ForEach(testArea, id: \.self) { area in
-                    Text(area)
+            Picker("Obec", selection: $selectedLocalityName) {
+                ForEach(state.localityNames, id: \.self) { locality in
+                    Text("\(locality.name) ") +
+                    Text("(okres \(locality.district))")
+                        .foregroundColor(.secondary)
                 }
             }
-            .pickerStyle(.menu)
+            .pickerStyle(.navigationLink)
         } header: {
             Text("Kde býváš?")
                 .font(.title2)

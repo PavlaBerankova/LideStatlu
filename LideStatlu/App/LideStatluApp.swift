@@ -9,11 +9,13 @@ import SwiftUI
 
 @main
 struct LideStatluApp: App {
+    @StateObject private var state = GenerationResultViewModel()
     var body: some Scene {
         WindowGroup {
             NavigationStack {
                 MainView()
                     .preferredColorScheme(.light)
+                    .environmentObject(state)
             }
         }
     }

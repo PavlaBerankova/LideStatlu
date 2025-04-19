@@ -11,8 +11,9 @@ struct AgeStructAttributes: Codable {
     let id: Int
     let localityCode: String
     let localityName: String
-    let totalPopulation: Int?
+    let district: String
 
+    let totalPopulation: Int?
     let age0to4: Int?
     let age5to9: Int?
     let age10to14: Int?
@@ -38,6 +39,7 @@ struct AgeStructAttributes: Codable {
         case id = "OBJECTID_1"
         case localityCode = "KOD_OBEC"
         case localityName = "NAZ_OBEC"
+        case district = "NAZ_LAU1"
         case totalPopulation = "Celkem"
 
         case age0to4 = "F0_4"

@@ -10,6 +10,8 @@ import Foundation
 @MainActor
 class GenerationResultViewModel: ObservableObject {
     @Published var ageStructures: [AgeStructure] = []
+    @Published var localityNames: [Locality] = []
+
     var urlString: String = APIEndpoint.ageStructure.urlString
 
     func loadData() async throws {
@@ -19,5 +21,16 @@ class GenerationResultViewModel: ObservableObject {
         } catch {
             throw FetchError.invalidResponse
         }
+    }
+
+    func getLocalityNames() {
+        // let mappedNames = ageStructures.map { $0.attributes.localityName: $0.attributes.district }
+        let mappedNames: [Locality] = ageStructures.map { Locality(name: $0.attributes.localityName, district: $0.attributes.district) }
+        // let uniqueNames = Array(Set(mappedNames))
+
+        let sortedNames = mappedNames.sorted {
+            $0.name.compare($1.name, locale: Locale(identifier: "cs_CZ")) == .orderedAscending // správné řazení podle českého jazyka
+        }
+        localityNames = sortedNames
     }
 }

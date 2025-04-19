@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct GenerationResultView: View {
-    @StateObject var state = GenerationResultViewModel()
+    @EnvironmentObject var state: GenerationResultViewModel
 
     var body: some View {
         VStack {
@@ -17,10 +17,6 @@ struct GenerationResultView: View {
             userAgeGroupPopulation
         }
         .padding(.horizontal)
-        .task {
-            try? await state.loadData()
-            print(state.ageStructures)
-        }
     }
 }
 
@@ -52,4 +48,5 @@ extension GenerationResultView {
 
 #Preview {
     GenerationResultView()
+        .environmentObject(GenerationResultViewModel())
 }
