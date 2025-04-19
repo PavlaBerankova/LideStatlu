@@ -24,7 +24,9 @@ struct QueryFormView: View {
             }
             .padding(.horizontal)
             .sheet(isPresented: $queryState.isSheetPresented) {
-                DataResultView(isSheetPresented: $queryState.isSheetPresented)
+                DataResultView(
+                    isSheetPresented: $queryState.isSheetPresented,
+                    userYearOfBirth: $queryState.userYearOfBirth)
             }
             .toolbar {
                 dismissButton
@@ -38,7 +40,7 @@ struct QueryFormView: View {
 extension QueryFormView {
     private var agePickerSection: some View {
         Section {
-            Picker("Rok narození", selection: $queryState.userYearofBirth) {
+            Picker("Rok narození", selection: $queryState.userYearOfBirth) {
                 ForEach(queryState.years, id: \.self) { year in
                     Text(String(year))
                 }

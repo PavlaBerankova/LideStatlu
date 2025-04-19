@@ -9,6 +9,7 @@ import SwiftUI
 
 struct GenerationResultView: View {
     @EnvironmentObject var state: GenerationResultViewModel
+    @Binding var userYearOfBirth: Int
 
     var body: some View {
         VStack {
@@ -24,8 +25,8 @@ extension GenerationResultView {
     private var userGeneration: some View {
         ResultRowView(
             title: "Patříš do generace",
-            result: "Mileniál",
-            subTitle: "(1980-1997)"
+            result: state.getUserGeneration(from: userYearOfBirth).title,
+            subTitle: state.getUserGeneration(from: userYearOfBirth).yearRange
         )
     }
 
@@ -47,6 +48,6 @@ extension GenerationResultView {
 }
 
 #Preview {
-    GenerationResultView()
+    GenerationResultView(userYearOfBirth: .constant(1_990))
         .environmentObject(GenerationResultViewModel())
 }
