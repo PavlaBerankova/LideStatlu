@@ -7,7 +7,6 @@
 
 import Foundation
 
-// Custom model for locality picker in QueryFormView
 struct Locality: Hashable {
     let name: String
     let district: String

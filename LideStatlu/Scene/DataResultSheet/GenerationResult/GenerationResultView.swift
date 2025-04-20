@@ -32,8 +32,8 @@ extension GenerationResultView {
 
     private var userLocalityTotalPopulation: some View {
         ResultRowView(
-            title: "V obci \(appState.ageStructures.first?.attributes.localityName ?? "Unknown") žije celkem",
-            result: "\(appState.ageStructures.first?.attributes.totalPopulation ?? 00) obyvatel",
+            title: "V obci \(appState.selectedLocality.name) žije celkem",
+            result: "\(appState.filteredLocalityData?.attributes.totalPopulation ?? 00) obyvatel",
             subTitle: nil
         )
     }
@@ -41,8 +41,8 @@ extension GenerationResultView {
     private var userAgeGroupPopulation: some View {
         ResultRowView(
             title: "Z toho je ve tvém věku",
-            result: "\(appState.ageStructures.first?.attributes.age30to34 ?? 00) obyvatel",
-            subTitle: "30-34"
+            result: "\(String(describing: appState.filteredLocalityData?.attributes.getPopulation(by: appState.getUserAgeByYearOfBirth()))) obyvatel",
+            subTitle: "(\(appState.getUserAgeByYearOfBirth()) let)"
         )
     }
 }

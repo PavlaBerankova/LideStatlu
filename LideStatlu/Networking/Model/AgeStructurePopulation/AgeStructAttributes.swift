@@ -85,4 +85,29 @@ extension AgeStructAttributes {
     var age80to84Title: String { "80–84 let" }
     var age85to89Title: String { "85–89 let" }
     var age90plusTitle: String { "90 a více let" }
+
+    func getPopulation(by userAge: Int) -> Int? {
+        switch userAge {
+        case 0...4: return age0to4
+        case 5...9: return age5to9
+        case 10...14: return age10to14
+        case 15...19: return age15to19
+        case 20...24: return age20to24
+        case 25...29: return age25to29
+        case 30...34: return age30to34
+        case 35...39: return age35to39
+        case 40...44: return age40to44
+        case 45...49: return age45to49
+        case 50...54: return age50to54
+        case 55...59: return age55to59
+        case 60...64: return age60to64
+        case 65...69: return age65to69
+        case 70...74: return age70to74
+        case 75...79: return age70to74
+        case 80...84: return age80to84
+        case 85...89: return age85to89
+        case 90...: return age90plus
+        default: return nil
+        }
+    }
 }

@@ -70,6 +70,7 @@ extension QueryFormView {
     private var showDataResultButton: some View {
         Button {
             appState.isSheetPresented = true
+            appState.filteredAgeStructureDataByLocality()
         } label: {
             Text("Hoď na to čučku")
                 .primaryButtonStyle()

@@ -12,6 +12,7 @@ class AppState: ObservableObject {
     // Data for Views and Picker
     @Published var ageStructures: [AgeStructure] = []
     @Published var localityNames: [Locality] = []
+    @Published var filteredLocalityData: AgeStructure? = nil
 
     // Navigation states
     @Published var isSheetPresented: Bool = false
@@ -38,6 +39,18 @@ class AppState: ObservableObject {
             $0.name.compare($1.name, locale: Locale(identifier: "cs_CZ")) == .orderedAscending // správné řazení podle českého jazyka
         }
         localityNames = sortedNames
+    }
+
+    func getUserAgeByYearOfBirth() -> Int {
+        let currentYear: Int = Calendar.current.component(.year, from: Date())
+        let userYearOfBirth: Int = self.userYearOfBirth
+        print(currentYear - userYearOfBirth)
+        return currentYear - userYearOfBirth
+    }
+
+    func filteredAgeStructureDataByLocality() {
+        let filteredData = ageStructures.filter { $0.attributes.localityName == selectedLocality.name && $0.attributes.district == selectedLocality.district }
+        self.filteredLocalityData = filteredData.first
     }
 
     func resetQueryForm() {
