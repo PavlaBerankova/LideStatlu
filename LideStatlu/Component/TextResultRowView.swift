@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-struct ResultRowView: View {
+struct TextResultRowView: View {
     let title: String
-    let result: String?
+    let result: String
     let subTitle: String?
 
     var body: some View {
@@ -17,21 +17,17 @@ struct ResultRowView: View {
             Divider()
             LazyVStack(alignment: .leading) {
                 HStack {
-                    Rectangle()
-                        .foregroundStyle(.accent)
-                        .frame(width: 10)
+                    verticalRedLine()
                     VStack(alignment: .leading) {
                         Text(title)
                             .font(.title2)
-                        if let result = result {
                             Text(result)
                                 .font(.largeTitle)
                                 .bold()
-                        }
                         if let subTitle = subTitle {
                             Text(subTitle)
                                 .foregroundStyle(.secondary)
-                                .font(.title3)
+                                .font(.subheadline)
                         }
                     }
                     .padding()
@@ -43,5 +39,5 @@ struct ResultRowView: View {
 }
 
 #Preview {
-    ResultRowView(title: "Patříš do generace", result: "Mileniál", subTitle: "(1980-1997)")
+    TextResultRowView(title: "Patříš do generace", result: "Mileniál", subTitle: "(1980-1997)")
 }

@@ -10,9 +10,12 @@ import SwiftUI
 struct DataResultView: View {
     var body: some View {
         TabView {
-            GenerationResultView()
-            GenderRatioView()
-            AgeStatsView()
+            NavigationStack {
+                GenerationResultView()
+            }
+            NavigationStack {
+                GenderRatioView()
+            }
         }
         .tabViewStyle(.page)
         .indexViewStyle(.page(backgroundDisplayMode: .always))
