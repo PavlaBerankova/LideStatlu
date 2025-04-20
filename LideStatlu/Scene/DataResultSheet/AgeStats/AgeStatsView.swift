@@ -8,14 +8,15 @@
 import SwiftUI
 
 struct AgeStatsView: View {
-    @Binding var isSheetPresented: Bool
+    @EnvironmentObject var appState: AppState
 
     var body: some View {
         NavigationStack {
             VStack {
                 Text("Statistiky podle věku")
                 Button {
-                    isSheetPresented = false
+                    appState.isSheetPresented = false
+                    appState.resetQueryForm()
                 } label: {
                     Text("Zkus to znovu a jinak")
                         .foregroundStyle(.accent)
@@ -28,6 +29,7 @@ struct AgeStatsView: View {
 
 #Preview {
     NavigationStack {
-        AgeStatsView(isSheetPresented: .constant(true))
+        AgeStatsView()
+            .environmentObject(AppState())
     }
 }

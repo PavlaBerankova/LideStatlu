@@ -7,8 +7,41 @@
 
 import Foundation
 
+@MainActor
 class AppState: ObservableObject {
-    @Published var ageStructures: [AgeStructure] = [] // zde potřebuju nahrát data z API, při spuštění aplikace MainView
-    @Published var localityName: [Locality] = [] // zde přemapuju a seřadím názvy všech obcí z API JSONu, nutné pro Picker v QueryForm
+    // Data for Views and Picker
+    @Published var ageStructures: [AgeStructure] = []
+    @Published var localityNames: [Locality] = []
+
+    // Navigation states
+    @Published var isSheetPresented: Bool = false
     @Published var isPresentedFullScreenCover: Bool = false
+
+    // Global user input
+    @Published var selectedLocality: Locality = Locality(name: "Brno", district: "Brno-město")
+    @Published var userYearOfBirth: Int = 2_000
+
+    var ageStructureUrl: String = APIEndpoint.ageStructure.urlString
+
+    func loadAgeStructureData() async throws {
+        do {
+            let dataResponse: Response<AgeStructure> = try await DataService.shared.fetchData(from: ageStructureUrl)
+            self.ageStructures = dataResponse.features
+        } catch {
+            throw FetchError.invalidResponse
+        }
+    }
+
+    func getLocalityNames() {
+        let mappedNames: [Locality] = ageStructures.map { Locality(name: $0.attributes.localityName, district: $0.attributes.district) }
+        let sortedNames = mappedNames.sorted {
+            $0.name.compare($1.name, locale: Locale(identifier: "cs_CZ")) == .orderedAscending // správné řazení podle českého jazyka
+        }
+        localityNames = sortedNames
+    }
+
+    func resetQueryForm() {
+        self.selectedLocality = .init(name: "Brno", district: "Brno-město")
+        self.userYearOfBirth = .init(2_000)
+    }
 }

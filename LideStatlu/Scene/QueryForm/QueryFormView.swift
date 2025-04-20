@@ -8,8 +8,7 @@
 import SwiftUI
 
 struct QueryFormView: View {
-    @EnvironmentObject var globalState: GenerationResultViewModel
-    @StateObject var queryState = QueryFormViewModel()
+    @StateObject var state = QueryFormViewModel()
     @EnvironmentObject var appState: AppState
 
     var body: some View {
@@ -22,10 +21,8 @@ struct QueryFormView: View {
                 showDataResultButton
             }
             .padding(.horizontal)
-            .sheet(isPresented: $queryState.isSheetPresented) {
-                DataResultView(
-                    isSheetPresented: $queryState.isSheetPresented,
-                    userYearOfBirth: $queryState.userYearOfBirth)
+            .sheet(isPresented: $appState.isSheetPresented) {
+                DataResultView()
             }
             .toolbar {
                 dismissButton
@@ -39,8 +36,8 @@ struct QueryFormView: View {
 extension QueryFormView {
     private var agePickerSection: some View {
         Section {
-            Picker("Rok narození", selection: $queryState.userYearOfBirth) {
-                ForEach(queryState.years, id: \.self) { year in
+            Picker("Rok narození", selection: $appState.userYearOfBirth) {
+                ForEach(state.years, id: \.self) { year in
                     Text(String(year))
                 }
             }
@@ -54,8 +51,8 @@ extension QueryFormView {
 
     private var localitySection: some View {
         Section {
-            Picker("Obec", selection: $queryState.selectedLocalityName) {
-                ForEach(globalState.localityNames, id: \.self) { locality in
+            Picker("Obec", selection: $appState.selectedLocality) {
+                ForEach(appState.localityNames, id: \.self) { locality in
                     Text("\(locality.name) ") +
                     Text("(okres \(locality.district))")
                         .foregroundColor(.secondary)
@@ -72,7 +69,7 @@ extension QueryFormView {
 
     private var showDataResultButton: some View {
         Button {
-            queryState.isSheetPresented = true
+            appState.isSheetPresented = true
         } label: {
             Text("Hoď na to čučku")
                 .primaryButtonStyle()

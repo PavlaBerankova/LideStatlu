@@ -8,16 +8,11 @@
 import SwiftUI
 
 struct DataResultView: View {
-    @Binding var isSheetPresented: Bool
-    @Binding var userYearOfBirth: Int
-
     var body: some View {
         TabView {
-            GenerationResultView(userYearOfBirth: $userYearOfBirth)
+            GenerationResultView()
             GenderRatioView()
-            NavigationStack {
-                AgeStatsView(isSheetPresented: $isSheetPresented)
-            }
+            AgeStatsView()
         }
         .tabViewStyle(.page)
         .indexViewStyle(.page(backgroundDisplayMode: .always))
@@ -25,5 +20,5 @@ struct DataResultView: View {
 }
 
 #Preview {
-    DataResultView(isSheetPresented: .constant(true), userYearOfBirth: .constant(1990))
+    DataResultView()
 }

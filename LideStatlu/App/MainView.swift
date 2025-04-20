@@ -9,7 +9,7 @@ import SwiftUI
 
 struct MainView: View {
     @State private var isPressed = false // pouze pro animaci buttonu
-    @EnvironmentObject var state: GenerationResultViewModel
+    // @EnvironmentObject var state: GenerationResultViewModel
     @EnvironmentObject var appState: AppState
 
     var body: some View {
@@ -22,8 +22,8 @@ struct MainView: View {
         .padding()
         .fullScreenCover(isPresented: $appState.isPresentedFullScreenCover, content: QueryFormView.init)
         .task {
-            try? await state.loadData()
-            state.getLocalityNames()
+            try? await appState.loadAgeStructureData()
+            appState.getLocalityNames()
         }
     }
 }
