@@ -8,18 +8,24 @@
 import SwiftUI
 
 struct MainView: View {
-    @State private var isPressed = false
-    @State private var isPresented = false
+    @State private var isPressed = false // pouze pro animaci buttonu
+    // @EnvironmentObject var state: GenerationResultViewModel
+    @EnvironmentObject var appState: AppState
 
     var body: some View {
-            VStack(alignment: .leading) {
-                logoBrno
-                appName
-                appDescription
-                nextScreenButton
-            }
-            .padding()
-            .fullScreenCover(isPresented: $isPresented, content: QueryFormView.init)
+        VStack(alignment: .leading) {
+            Spacer()
+            logoBrno
+            appName
+            appDescription
+            nextScreenButton
+        }
+        .padding()
+        .fullScreenCover(isPresented: $appState.isPresentedFullScreenCover, content: QueryFormView.init)
+        .task {
+            try? await appState.loadAgeStructureData()
+            appState.getLocalityNames()
+        }
     }
 }
 
@@ -34,26 +40,27 @@ extension MainView {
         Group {
             Text("Lidé")
                 .foregroundStyle(.black)
+            Text("v okolí")
+                .foregroundStyle(.black)
             Text("Štatlu")
                 .foregroundStyle(.accent)
         }
         .font(.system(size: 54, weight: .bold))
-        .bold()
     }
 
     private var appDescription: some View {
-        Text("Zjisti, kdo kolem tebe žije.\nKolik vrstevníků je ve tvé čtvrti. Mrkni na statistiky podle věku a poměr mužů a žen pro každou část Brna. ")
+        Text("Do jaké generace patříš, kolik lidí žije ve tvé obci, převažují ženy či muži?\nZjisti, kolik máš kolem sebe vrstevníků.\nMrkni na statistiky pro obce v metropolitní oblasti Brna.")
             .font(.title3)
             .padding(.top)
             .foregroundStyle(.black.opacity(0.8))
-            .padding(.bottom, 30)
+            .padding(.bottom, 50)
     }
 
     private var nextScreenButton: some View {
         Button {
-            isPresented.toggle()
+            appState.isPresentedFullScreenCover = true
         } label: {
-            Text("Hoď na to čučku")
+            Text("Pojďme na to")
                 .primaryButtonStyle()
                 .scaleEffect(isPressed ? 0.95 : 1.0)
                        .animation(.easeOut(duration: 0.2), value: isPressed)
@@ -67,5 +74,9 @@ extension MainView {
 }
 
 #Preview {
-    MainView()
+    NavigationStack {
+        MainView()
+            .environmentObject(GenerationResultViewModel())
+            .environmentObject(AppState())
+    }
 }
