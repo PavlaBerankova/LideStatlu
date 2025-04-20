@@ -8,10 +8,9 @@
 import SwiftUI
 
 struct QueryFormView: View {
-    @Environment(\.presentationMode)
-    var presentationMode
     @EnvironmentObject var globalState: GenerationResultViewModel
     @StateObject var queryState = QueryFormViewModel()
+    @EnvironmentObject var appState: AppState
 
     var body: some View {
         NavigationStack {
@@ -83,11 +82,12 @@ extension QueryFormView {
 
     private var dismissButton: some ToolbarContent {
         ToolbarItem(placement: .navigationBarTrailing) {
-            Image(systemName: "xmark")
-                .padding()
-                .onTapGesture {
-                    presentationMode.wrappedValue.dismiss()
-                }
+            Button {
+                appState.isPresentedFullScreenCover = false
+            } label: {
+                Image(systemName: "xmark")
+                    .padding()
+            }
         }
     }
 }

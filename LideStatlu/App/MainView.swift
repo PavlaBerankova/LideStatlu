@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct MainView: View {
-    @State private var isPressed = false
-    @State private var isPresented = false
+    @State private var isPressed = false // pouze pro animaci buttonu
     @EnvironmentObject var state: GenerationResultViewModel
+    @EnvironmentObject var appState: AppState
 
     var body: some View {
         VStack(alignment: .leading) {
@@ -20,7 +20,7 @@ struct MainView: View {
             nextScreenButton
         }
         .padding()
-        .fullScreenCover(isPresented: $isPresented, content: QueryFormView.init)
+        .fullScreenCover(isPresented: $appState.isPresentedFullScreenCover, content: QueryFormView.init)
         .task {
             try? await state.loadData()
             state.getLocalityNames()
@@ -56,7 +56,7 @@ extension MainView {
 
     private var nextScreenButton: some View {
         Button {
-            isPresented = true
+            appState.isPresentedFullScreenCover = true
         } label: {
             Text("Pojďme na to")
                 .primaryButtonStyle()
@@ -75,5 +75,6 @@ extension MainView {
     NavigationStack {
         MainView()
             .environmentObject(GenerationResultViewModel())
+            .environmentObject(AppState())
     }
 }
