@@ -11,8 +11,10 @@ import Foundation
 class AppState: ObservableObject {
     // Data for Views and Picker
     @Published var ageStructures: [AgeStructure] = []
+    @Published var ageProfiles: [AgeProfile] = []
     @Published var localityNames: [Locality] = []
-    @Published var filteredLocalityData: AgeStructure?
+    @Published var filteredStructureData: [AgeStructure] = []
+    @Published var filteredProfileData: [AgeProfile] = []
 
     // Navigation states
     @Published var isSheetPresented: Bool = false
@@ -23,11 +25,21 @@ class AppState: ObservableObject {
     @Published var userYearOfBirth: Int = 2_000
 
     var ageStructureUrl: String = APIEndpoint.ageStructure.urlString
+    var ageProfileUrl: String = APIEndpoint.ageProfile.urlString
 
     func loadAgeStructureData() async throws {
         do {
             let dataResponse: Response<AgeStructure> = try await DataService.shared.fetchData(from: ageStructureUrl)
             self.ageStructures = dataResponse.features
+        } catch {
+            throw FetchError.invalidResponse
+        }
+    }
+
+    func loadAgeProfileData() async throws {
+        do {
+            let dataResponse: Response<AgeProfile> = try await DataService.shared.fetchData(from: ageProfileUrl)
+            self.ageProfiles = dataResponse.features
         } catch {
             throw FetchError.invalidResponse
         }
@@ -50,7 +62,12 @@ class AppState: ObservableObject {
 
     func filteredAgeStructureDataByLocality() {
         let filteredData = ageStructures.filter { $0.attributes.localityName == selectedLocality.name && $0.attributes.district == selectedLocality.district }
-        self.filteredLocalityData = filteredData.first
+        self.filteredStructureData = filteredData
+    }
+
+    func filteredAgeProfileDataByLocality() {
+        let filteredData = ageProfiles.filter { $0.attributes.localityName == selectedLocality.name && $0.attributes.district == selectedLocality.district }
+        self.filteredProfileData = filteredData
     }
 
     func resetQueryForm() {

@@ -71,7 +71,6 @@ opt_in_rules:
   - sorted_imports
   - static_operator
   - strict_fileprivate
-  - switch_case_on_newline
   - toggle_bool
   - trailing_closure
   - unneeded_parentheses_in_closure_argument
@@ -96,7 +95,7 @@ identifier_name:
 
 # Disable errors, allow only warnings
 cyclomatic_complexity:
-  warning: 10
+  warning: 20
 type_name:
   max_length: 50
 force_cast: warning
