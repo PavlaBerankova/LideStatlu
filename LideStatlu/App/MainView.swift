@@ -14,6 +14,7 @@ struct MainView: View {
 
     var body: some View {
         VStack(alignment: .leading) {
+            Spacer()
             logoBrno
             appName
             appDescription
@@ -39,19 +40,20 @@ extension MainView {
         Group {
             Text("Lidé")
                 .foregroundStyle(.black)
+            Text("v okolí")
+                .foregroundStyle(.black)
             Text("Štatlu")
                 .foregroundStyle(.accent)
         }
         .font(.system(size: 54, weight: .bold))
-        .bold()
     }
 
     private var appDescription: some View {
-        Text("Zjisti, kdo kolem tebe žije.\nKolik vrstevníků je ve tvé obci. Mrkni na statistiky podle věku nebo poměr mužů a žen pro obce v metropolitní oblasti Brna. ")
+        Text("Do jaké generace patříš, kolik lidí žije ve tvé obci, převažují ženy či muži?\nZjisti, kolik máš kolem sebe vrstevníků.\nMrkni na statistiky pro obce v metropolitní oblasti Brna.")
             .font(.title3)
             .padding(.top)
             .foregroundStyle(.black.opacity(0.8))
-            .padding(.bottom, 30)
+            .padding(.bottom, 50)
     }
 
     private var nextScreenButton: some View {

@@ -12,7 +12,7 @@ class AppState: ObservableObject {
     // Data for Views and Picker
     @Published var ageStructures: [AgeStructure] = []
     @Published var localityNames: [Locality] = []
-    @Published var filteredLocalityData: AgeStructure? = nil
+    @Published var filteredLocalityData: AgeStructure?
 
     // Navigation states
     @Published var isSheetPresented: Bool = false

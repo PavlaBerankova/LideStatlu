@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ResultRowView: View {
     let title: String
-    let result: String
+    let result: String?
     let subTitle: String?
 
     var body: some View {
@@ -23,10 +23,11 @@ struct ResultRowView: View {
                     VStack(alignment: .leading) {
                         Text(title)
                             .font(.title2)
-                        Text(result)
-                            .font(.largeTitle)
-                            .bold()
-                            .kerning(1.5)
+                        if let result = result {
+                            Text(result)
+                                .font(.largeTitle)
+                                .bold()
+                        }
                         if let subTitle = subTitle {
                             Text(subTitle)
                                 .foregroundStyle(.secondary)
