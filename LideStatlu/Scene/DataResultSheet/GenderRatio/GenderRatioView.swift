@@ -8,17 +8,18 @@
 import SwiftUI
 
 struct GenderRatioView: View {
-    @EnvironmentObject var appState: AppState
+    @ObservedObject var state: GenderRatioViewModel
 
     var body: some View {
         VStack {
             totalPopulationByGender
             averageAge
             totalAverageAge
-            resetButton
+                .padding(.bottom)
+            tryAgainButton
         }
         .padding(.horizontal)
-        .navigationTitle(appState.selectedLocality.name)
+        .navigationTitle(state.selectedLocality.name)
         .navigationBarTitleDisplayMode(.inline)
     }
 }
@@ -26,31 +27,30 @@ struct GenderRatioView: View {
 extension GenderRatioView {
     private var totalPopulationByGender: some View {
         GenderResultRowView(
-            title: "V obci Brno žije",
-            femaleResult: "145 000 žen",
-            maleResult: "150 000 mužů",
+            title: "V obci \(state.selectedLocality.name) žije",
+            femaleResult: state.femalePopulation,
+            maleResult: state.malePopulation,
             subTitle: nil)
     }
 
     private var averageAge: some View {
         GenderResultRowView(
             title: "Průměrný věk",
-            femaleResult: "42",
-            maleResult: "43",
+            femaleResult: state.femaleAverageAge,
+            maleResult: state.maleAverageAge,
             subTitle: nil)
     }
 
     private var totalAverageAge: some View {
         TextResultRowView(
             title: "Celkový průměrný věk",
-            result: "43",
+            result: state.totalAverageAge,
             subTitle: nil)
     }
 
-    private var resetButton: some View {
+    private var tryAgainButton: some View {
         Button {
-            appState.isSheetPresented = false
-            appState.resetQueryForm()
+            state.tryAgainButtonTapped()
         } label: {
             HStack {
                 Image(systemName: "arrow.clockwise")
@@ -58,10 +58,10 @@ extension GenderRatioView {
             }
             .primaryButtonStyle()
         }
+        .padding(.top)
     }
 }
 
 #Preview {
-    GenderRatioView()
-        .environmentObject(AppState())
+    GenderRatioView(state: GenderRatioViewModel(appState: AppState()))
 }

@@ -62,5 +62,3 @@ extension GenderResultRowView {
 #Preview {
     GenderResultRowView(title: "V obci Brno žije celkem", femaleResult: "145 000 žen", maleResult: "156 000 mužů", subTitle: "(30-34 let)")
 }
-
-

@@ -24,8 +24,26 @@ struct MainView: View {
         .padding()
         .fullScreenCover(isPresented: $appState.isPresentedFullScreenCover, content: QueryFormView.init)
         .task {
-            try? await appState.loadAgeStructureData()
-            appState.getLocalityNames()
+            do {
+                try await withThrowingTaskGroup(of: Void.self) { group in
+                    group.addTask {
+                        try await appState.loadAgeStructureData()
+                    }
+
+                    group.addTask {
+                        try await appState.loadAgeProfileData()
+                    }
+
+                    // počká se dokud se nenačtou všechna data z obou skupin
+                    try await group.waitForAll()
+                }
+
+                // Pokud vše proběhlo OK
+                appState.getLocalityNames()
+
+            } catch let error {
+                print("\(error): Failed to load data. Check your connection.")
+            }
         }
     }
 }

@@ -16,7 +16,7 @@ struct DataResultView: View {
                 GenerationResultView(state: GenerationResultViewModel(appState: appState))
             }
             NavigationStack {
-                GenderRatioView()
+                GenderRatioView(state: GenderRatioViewModel(appState: appState))
             }
         }
         .tabViewStyle(.page)
