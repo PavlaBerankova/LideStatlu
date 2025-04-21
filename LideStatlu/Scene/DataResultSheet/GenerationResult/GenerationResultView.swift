@@ -8,8 +8,7 @@
 import SwiftUI
 
 struct GenerationResultView: View {
-    @EnvironmentObject var state: GenerationResultViewModel
-    @EnvironmentObject var appState: AppState
+    @ObservedObject var state: GenerationResultViewModel
 
     var body: some View {
         VStack {
@@ -19,7 +18,7 @@ struct GenerationResultView: View {
             ageIndex
         }
         .padding(.horizontal)
-        .navigationTitle(appState.selectedLocality.name)
+        .navigationTitle(state.selectedLocality.name)
         .navigationBarTitleDisplayMode(.inline)
     }
 }
@@ -28,15 +27,15 @@ extension GenerationResultView {
     private var userGeneration: some View {
         TextResultRowView(
             title: "Patříš do generace",
-            result: state.getUserGeneration(by: appState.userYearOfBirth).title,
-            subTitle: state.getUserGeneration(by: appState.userYearOfBirth).yearRange
+            result: state.userGenerationTitle,
+            subTitle: state.userGenerationYearRange
         )
     }
 
     private var userLocalityTotalPopulation: some View {
         TextResultRowView(
-            title: "V obci \(appState.selectedLocality.name) žije celkem",
-            result: "\(appState.filteredLocalityData?.attributes.totalPopulation?.formattedWithSeparator() ?? "") obyvatel",
+            title: "V obci \(state.selectedLocality.name) žije celkem",
+            result: state.filteredAndFormattedPopulationData + " obyvatel",
             subTitle: nil
         )
     }
@@ -44,7 +43,7 @@ extension GenerationResultView {
     private var userAgeGroupPopulation: some View {
         TextResultRowView(
             title: "Z toho je ve tvé věkové kategorii",
-            result: "\(appState.filteredLocalityData?.attributes.getPopulation(by: appState.getUserAgeByYearOfBirth())?.formattedWithSeparator() ?? "") obyvatel",
+            result: state.populationByUserAgeGroup + " obyvatel",
             subTitle: nil
         )
     }
@@ -58,7 +57,5 @@ extension GenerationResultView {
 }
 
 #Preview {
-    GenerationResultView()
-        .environmentObject(GenerationResultViewModel())
-        .environmentObject(AppState())
+    GenerationResultView(state: GenerationResultViewModel(appState: AppState()))
 }

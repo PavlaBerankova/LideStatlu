@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct QueryFormView: View {
-    @StateObject var state = QueryFormViewModel()
     @EnvironmentObject var appState: AppState
 
     var body: some View {
@@ -37,7 +36,7 @@ extension QueryFormView {
     private var agePickerSection: some View {
         Section {
             Picker("Rok narození", selection: $appState.userYearOfBirth) {
-                ForEach(state.years, id: \.self) { year in
+                ForEach(years, id: \.self) { year in
                     Text(String(year))
                 }
             }
@@ -70,7 +69,7 @@ extension QueryFormView {
     private var showDataResultButton: some View {
         Button {
             appState.isSheetPresented = true
-            appState.filteredAgeStructureDataByLocality()
+            appState.getFilteredAgeStructureData()
         } label: {
             Text("Hoď na to čučku")
                 .primaryButtonStyle()
@@ -93,6 +92,6 @@ extension QueryFormView {
 #Preview {
     NavigationStack {
         QueryFormView()
-            .environmentObject(GenerationResultViewModel())
+            .environmentObject(AppState())
     }
 }

@@ -8,8 +8,7 @@
 import SwiftUI
 
 struct MainView: View {
-    @State private var isPressed = false // pouze pro animaci buttonu
-    // @EnvironmentObject var state: GenerationResultViewModel
+    @State private var isPressed = false // only for button animation
     @EnvironmentObject var appState: AppState
 
     var body: some View {
@@ -76,7 +75,7 @@ extension MainView {
 #Preview {
     NavigationStack {
         MainView()
-            .environmentObject(GenerationResultViewModel())
+            .environmentObject(GenerationResultViewModel(appState: AppState()))
             .environmentObject(AppState())
     }
 }

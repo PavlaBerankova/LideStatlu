@@ -12,14 +12,14 @@ class AppState: ObservableObject {
     // Data for Views and Picker
     @Published var ageStructures: [AgeStructure] = []
     @Published var localityNames: [Locality] = []
-    @Published var filteredLocalityData: AgeStructure?
+    @Published var filteredStructureData: AgeStructure?
 
     // Navigation states
     @Published var isSheetPresented: Bool = false
     @Published var isPresentedFullScreenCover: Bool = false
 
     // Global user input
-    @Published var selectedLocality: Locality = Locality(name: "Brno", district: "Brno-město")
+    @Published var selectedLocality: Locality = Locality(id: 184, name: "Brno", district: "Brno-město")
     @Published var userYearOfBirth: Int = 2_000
 
     var ageStructureUrl: String = APIEndpoint.ageStructure.urlString
@@ -33,9 +33,21 @@ class AppState: ObservableObject {
         }
     }
 
+    func getFilteredAgeStructureData() {
+        let filteredData = ageStructures.filter {
+            $0.attributes.id == selectedLocality.id
+        }
+        self.filteredStructureData = filteredData.first
+    }
+
     func getLocalityNames() {
-        let mappedNames: [Locality] = ageStructures.map { Locality(name: $0.attributes.localityName, district: $0.attributes.district) }
-        let sortedNames = mappedNames.sorted {
+        let mappedLocalityNames: [Locality] = ageStructures.map {
+            Locality(
+                id: $0.attributes.id,
+                name: $0.attributes.localityName,
+                district: $0.attributes.district)
+        }
+        let sortedNames = mappedLocalityNames.sorted {
             $0.name.compare($1.name, locale: Locale(identifier: "cs_CZ")) == .orderedAscending // správné řazení podle českého jazyka
         }
         localityNames = sortedNames
@@ -48,13 +60,13 @@ class AppState: ObservableObject {
         return currentYear - userYearOfBirth
     }
 
-    func filteredAgeStructureDataByLocality() {
-        let filteredData = ageStructures.filter { $0.attributes.localityName == selectedLocality.name && $0.attributes.district == selectedLocality.district }
-        self.filteredLocalityData = filteredData.first
-    }
+//    func filteredAgeStructureDataByLocality() {
+//        let filteredData = ageStructures.filter { $0.attributes.localityName == selectedLocality.name && $0.attributes.district == selectedLocality.district }
+//        self.filteredLocalityData = filteredData.first
+//    }
 
     func resetQueryForm() {
-        self.selectedLocality = .init(name: "Brno", district: "Brno-město")
+        self.selectedLocality = .init(id: 184, name: "Brno", district: "Brno-město")
         self.userYearOfBirth = .init(2_000)
     }
 }

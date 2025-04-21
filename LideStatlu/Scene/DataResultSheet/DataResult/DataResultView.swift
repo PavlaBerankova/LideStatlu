@@ -8,10 +8,12 @@
 import SwiftUI
 
 struct DataResultView: View {
+    @EnvironmentObject var appState: AppState
+
     var body: some View {
         TabView {
             NavigationStack {
-                GenerationResultView()
+                GenerationResultView(state: GenerationResultViewModel(appState: appState))
             }
             NavigationStack {
                 GenderRatioView()

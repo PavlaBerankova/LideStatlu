@@ -9,10 +9,46 @@ import Foundation
 
 @MainActor
 class GenerationResultViewModel: ObservableObject {
+    private var appState: AppState
+
+    init(appState: AppState, userGeneration: Generation? = nil) {
+        self.appState = appState
+        self.userGeneration = userGeneration
+    }
+
     @Published var userGeneration: Generation?
 
-    func getUserGeneration(by year: Int) -> Generation {
-        switch year {
+    var userYearOfBirth: Int {
+        appState.userYearOfBirth
+    }
+
+    var userAge: Int {
+        appState.getUserAgeByYearOfBirth()
+    }
+
+    var selectedLocality: Locality {
+        appState.selectedLocality
+    }
+
+    var userGenerationTitle: String {
+        getUserGeneration().title
+    }
+
+    var userGenerationYearRange: String {
+        getUserGeneration().yearRange
+    }
+
+    var filteredAndFormattedPopulationData: String {
+        appState.filteredStructureData?.attributes.totalPopulation?.formattedWithSeparator() ?? "-"
+    }
+
+    var populationByUserAgeGroup: String {
+        let populationAgeGroup = appState.filteredStructureData?.attributes.getPopulation(by: userAge)
+        return populationAgeGroup?.formattedWithSeparator() ?? "-"
+    }
+
+    func getUserGeneration() -> Generation {
+        switch userYearOfBirth {
         case 1_925...1_945:
             return .genSilent
         case 1_946...1_964:
