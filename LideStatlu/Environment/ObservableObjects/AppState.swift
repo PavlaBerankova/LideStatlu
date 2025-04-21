@@ -20,7 +20,7 @@ class AppState: ObservableObject {
 
     // Global user input
     @Published var selectedLocality: Locality = Locality(id: 184, name: "Brno", district: "Brno-město")
-    @Published var userYearOfBirth: Int = 2_000
+    @Published var userYearOfBirth: Int = 1_999
 
     var ageStructureUrl: String = APIEndpoint.ageStructure.urlString
 
@@ -48,7 +48,7 @@ class AppState: ObservableObject {
                 district: $0.attributes.district)
         }
         let sortedNames = mappedLocalityNames.sorted {
-            $0.name.compare($1.name, locale: Locale(identifier: "cs_CZ")) == .orderedAscending // správné řazení podle českého jazyka
+            $0.name.compare($1.name, locale: Locale(identifier: "cs_CZ")) == .orderedAscending
         }
         localityNames = sortedNames
     }
@@ -59,11 +59,6 @@ class AppState: ObservableObject {
         print(currentYear - userYearOfBirth)
         return currentYear - userYearOfBirth
     }
-
-//    func filteredAgeStructureDataByLocality() {
-//        let filteredData = ageStructures.filter { $0.attributes.localityName == selectedLocality.name && $0.attributes.district == selectedLocality.district }
-//        self.filteredLocalityData = filteredData.first
-//    }
 
     func resetQueryForm() {
         self.selectedLocality = .init(id: 184, name: "Brno", district: "Brno-město")

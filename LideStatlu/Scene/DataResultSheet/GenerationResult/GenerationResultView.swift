@@ -51,7 +51,7 @@ extension GenerationResultView {
     private var ageIndex: some View {
         TextResultRowView(
             title: "Index stáří",
-            result: "132",
+            result: state.ageIndex,
             subTitle: "Index menší než 100 - mladá populace\nIndex větší než 100 - stárnoucí populace")
     }
 }
