@@ -20,20 +20,18 @@ struct TextResultRowView: View {
                     verticalRedLine()
                     VStack(alignment: .leading) {
                         Text(title)
-                            .font(.title2)
+                            .resultRowTitleStyle()
                             Text(result)
-                                .font(.largeTitle)
-                                .bold()
+                            .resultRowValueStyle()
                         if let subTitle = subTitle {
                             Text(subTitle)
-                                .foregroundStyle(.secondary)
-                                .font(.subheadline)
+                                .resultRowSubtitleStyle()
                         }
                     }
                     .padding()
                 }
             }
-            .padding(.vertical)
+            .padding(.vertical, 5)
         }
     }
 }

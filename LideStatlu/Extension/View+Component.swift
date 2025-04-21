@@ -8,9 +8,9 @@
 import SwiftUI
 
 extension View {
-    func verticalRedLine() -> some View {
+    func verticalRedLine(width: CGFloat = 10) -> some View {
         Rectangle()
             .foregroundStyle(.accent)
-            .frame(width: 10)
+            .frame(width: width)
     }
 }

@@ -14,8 +14,10 @@ struct MainView: View {
     var body: some View {
         VStack(alignment: .leading) {
             Spacer()
-            logoBrno
-            appName
+            HStack(alignment: .bottom) {
+                redLines
+                appName
+            }
             appDescription
             nextScreenButton
         }
@@ -29,14 +31,17 @@ struct MainView: View {
 }
 
 extension MainView {
-    private var logoBrno: some View {
-        Image(.logoBrno)
-            .resizable()
-            .scaledToFit()
+    private var redLines: some View {
+        Group {
+            verticalRedLine(width: 25)
+            verticalRedLine(width: 20)
+                .frame(height: 200)
+        }
+        .padding([.top, .trailing])
     }
 
     private var appName: some View {
-        Group {
+        VStack(alignment: .leading) {
             Text("Lidé")
                 .foregroundStyle(.black)
             Text("v okolí")
@@ -48,7 +53,7 @@ extension MainView {
     }
 
     private var appDescription: some View {
-        Text("Do jaké generace patříš, kolik lidí žije ve tvé obci, převažují ženy či muži?\nZjisti, kolik máš kolem sebe vrstevníků.\nMrkni na statistiky pro obce v metropolitní oblasti Brna.")
+        Text("Zjisti, do jaké generace patříš nebo kolik lidí ve tvé věkové skupině žije ve tvé obci.\n\nProzkoumej statistiky obcí v metropolitní oblasti Brna — třeba tě překvapí poměr žen a mužů nebo index stáří.")
             .font(.title3)
             .padding(.top)
             .foregroundStyle(.black.opacity(0.8))
