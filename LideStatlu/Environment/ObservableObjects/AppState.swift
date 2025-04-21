@@ -11,8 +11,10 @@ import Foundation
 class AppState: ObservableObject {
     // Data for Views and Picker
     @Published var ageStructures: [AgeStructure] = []
+    @Published var ageProfiles: [AgeProfile] = []
     @Published var localityNames: [Locality] = []
     @Published var filteredStructureData: AgeStructure?
+    @Published var filteredProfileData: AgeProfile?
 
     // Navigation states
     @Published var isSheetPresented: Bool = false
@@ -20,9 +22,19 @@ class AppState: ObservableObject {
 
     // Global user input
     @Published var selectedLocality: Locality = Locality(id: 184, name: "Brno", district: "Brno-město")
-    @Published var userYearOfBirth: Int = 2_000
+    @Published var userYearOfBirth: Int = 1_999
 
     var ageStructureUrl: String = APIEndpoint.ageStructure.urlString
+    var ageProfileUrl: String = APIEndpoint.ageProfile.urlString
+
+    func loadAgeProfileData() async throws {
+        do {
+            let dataResponse: Response<AgeProfile> = try await DataService.shared.fetchData(from: ageProfileUrl)
+            self.ageProfiles = dataResponse.features
+        } catch {
+            throw FetchError.invalidResponse
+        }
+    }
 
     func loadAgeStructureData() async throws {
         do {
@@ -40,6 +52,13 @@ class AppState: ObservableObject {
         self.filteredStructureData = filteredData.first
     }
 
+    func getFilteredAgeProfileData() {
+        let filteredData = ageProfiles.filter {
+            $0.attributes.id == selectedLocality.id
+        }
+        self.filteredProfileData = filteredData.first
+    }
+
     func getLocalityNames() {
         let mappedLocalityNames: [Locality] = ageStructures.map {
             Locality(
@@ -48,7 +67,7 @@ class AppState: ObservableObject {
                 district: $0.attributes.district)
         }
         let sortedNames = mappedLocalityNames.sorted {
-            $0.name.compare($1.name, locale: Locale(identifier: "cs_CZ")) == .orderedAscending // správné řazení podle českého jazyka
+            $0.name.compare($1.name, locale: Locale(identifier: "cs_CZ")) == .orderedAscending
         }
         localityNames = sortedNames
     }
@@ -60,13 +79,15 @@ class AppState: ObservableObject {
         return currentYear - userYearOfBirth
     }
 
-//    func filteredAgeStructureDataByLocality() {
-//        let filteredData = ageStructures.filter { $0.attributes.localityName == selectedLocality.name && $0.attributes.district == selectedLocality.district }
-//        self.filteredLocalityData = filteredData.first
-//    }
-
     func resetQueryForm() {
         self.selectedLocality = .init(id: 184, name: "Brno", district: "Brno-město")
-        self.userYearOfBirth = .init(2_000)
+        self.userYearOfBirth = .init(1_999)
+        self.isSheetPresented = false
+    }
+
+    func showStatisticsSheet() {
+        self.isSheetPresented = true
+        getFilteredAgeProfileData()
+        getFilteredAgeStructureData()
     }
 }

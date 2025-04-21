@@ -22,33 +22,27 @@ struct GenderResultRowView: View {
                 HStack {
                     verticalRedLine()
                     VStack(alignment: .leading) {
-                        descriptionText
+                        Text(title)
+                            .resultRowTitleStyle()
                         Group {
                             femaleResultLine
                             maleResultLine
                         }
-                        .font(.largeTitle)
-                        .bold()
+                        .resultRowValueStyle()
                         if let subTitle = subTitle {
                             Text(subTitle)
-                                .foregroundStyle(.secondary)
-                                .font(.title3)
+                                .resultRowSubtitleStyle()
                         }
                     }
                     .padding()
                 }
             }
-            .padding(.vertical)
+            .padding(.vertical, 5)
         }
     }
 }
 
 extension GenderResultRowView {
-    private var descriptionText: some View {
-        Text(title)
-            .font(.title2)
-    }
-
     private var femaleResultLine: some View {
         HStack {
             femaleImage

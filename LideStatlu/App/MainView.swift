@@ -14,29 +14,52 @@ struct MainView: View {
     var body: some View {
         VStack(alignment: .leading) {
             Spacer()
-            logoBrno
-            appName
+            HStack(alignment: .bottom) {
+                redLines
+                appName
+            }
             appDescription
             nextScreenButton
         }
         .padding()
         .fullScreenCover(isPresented: $appState.isPresentedFullScreenCover, content: QueryFormView.init)
         .task {
-            try? await appState.loadAgeStructureData()
-            appState.getLocalityNames()
+            do {
+                try await withThrowingTaskGroup(of: Void.self) { group in
+                    group.addTask {
+                        try await appState.loadAgeStructureData()
+                    }
+
+                    group.addTask {
+                        try await appState.loadAgeProfileData()
+                    }
+
+                    // počká se dokud se nenačtou všechna data z obou skupin
+                    try await group.waitForAll()
+                }
+
+                // Pokud vše proběhlo OK
+                appState.getLocalityNames()
+
+            } catch let error {
+                print("\(error): Failed to load data. Check your connection.")
+            }
         }
     }
 }
 
 extension MainView {
-    private var logoBrno: some View {
-        Image(.logoBrno)
-            .resizable()
-            .scaledToFit()
+    private var redLines: some View {
+        Group {
+            verticalRedLine(width: 25)
+            verticalRedLine(width: 20)
+                .frame(height: 200)
+        }
+        .padding([.top, .trailing])
     }
 
     private var appName: some View {
-        Group {
+        VStack(alignment: .leading) {
             Text("Lidé")
                 .foregroundStyle(.black)
             Text("v okolí")
@@ -48,7 +71,7 @@ extension MainView {
     }
 
     private var appDescription: some View {
-        Text("Do jaké generace patříš, kolik lidí žije ve tvé obci, převažují ženy či muži?\nZjisti, kolik máš kolem sebe vrstevníků.\nMrkni na statistiky pro obce v metropolitní oblasti Brna.")
+        Text("Zjisti, do jaké generace patříš nebo kolik lidí ve tvé věkové skupině žije ve tvé obci.\n\nProzkoumej statistiky obcí v metropolitní oblasti Brna — třeba tě překvapí poměr žen a mužů nebo index stáří.")
             .font(.title3)
             .padding(.top)
             .foregroundStyle(.black.opacity(0.8))

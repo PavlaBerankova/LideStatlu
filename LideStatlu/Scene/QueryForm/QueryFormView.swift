@@ -17,7 +17,7 @@ struct QueryFormView: View {
                 localitySection
             }
             VStack(alignment: .leading) {
-                showDataResultButton
+                showStatisticsSheetButton
             }
             .padding(.horizontal)
             .sheet(isPresented: $appState.isSheetPresented) {
@@ -59,17 +59,16 @@ extension QueryFormView {
             }
             .pickerStyle(.navigationLink)
         } header: {
-            Text("Kde býváš?")
+            Text("Vyber oblast")
                 .font(.title2)
                 .bold()
                 .foregroundStyle(.black)
         }
     }
 
-    private var showDataResultButton: some View {
+    private var showStatisticsSheetButton: some View {
         Button {
-            appState.isSheetPresented = true
-            appState.getFilteredAgeStructureData()
+            appState.showStatisticsSheet()
         } label: {
             Text("Hoď na to čučku")
                 .primaryButtonStyle()

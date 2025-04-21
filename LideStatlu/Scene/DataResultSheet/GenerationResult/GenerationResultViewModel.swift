@@ -26,6 +26,14 @@ class GenerationResultViewModel: ObservableObject {
         appState.getUserAgeByYearOfBirth()
     }
 
+    var ageIndex: String {
+        if let ageIndex = appState.filteredStructureData?.attributes.ageIndex {
+            let roundedIndex = Int(ageIndex.rounded())
+            return String(roundedIndex)
+        }
+        return "-"
+    }
+
     var selectedLocality: Locality {
         appState.selectedLocality
     }
