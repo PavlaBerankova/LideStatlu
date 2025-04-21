@@ -22,7 +22,13 @@ struct MainView: View {
             nextScreenButton
         }
         .padding()
-        .fullScreenCover(isPresented: $appState.isPresentedFullScreenCover, content: QueryFormView.init)
+        .fullScreenCover(isPresented: $appState.isPresentedFullScreenCover) {
+            if appState.isLoading {
+                LoadingView(isVisible: $appState.isLoading, fetchError: $appState.fetchError)
+            } else {
+                QueryFormView()
+            }
+        }
         .task {
             do {
                 try await withThrowingTaskGroup(of: Void.self) { group in
@@ -34,15 +40,15 @@ struct MainView: View {
                         try await appState.loadAgeProfileData()
                     }
 
-                    // počká se dokud se nenačtou všechna data z obou skupin
+                    // počká, dokud se nenačtou všechna data z obou skupin
                     try await group.waitForAll()
                 }
 
                 // Pokud vše proběhlo OK
                 appState.getLocalityNames()
-
-            } catch let error {
-                print("\(error): Failed to load data. Check your connection.")
+                appState.isLoading = false
+            } catch {
+                print("Failed to load data. Check your connection.")
             }
         }
     }

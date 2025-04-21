@@ -9,21 +9,24 @@ import Foundation
 
 @MainActor
 class AppState: ObservableObject {
-    // Data for Views and Picker
+    // States
     @Published var ageStructures: [AgeStructure] = []
     @Published var ageProfiles: [AgeProfile] = []
     @Published var localityNames: [Locality] = []
     @Published var filteredStructureData: AgeStructure?
     @Published var filteredProfileData: AgeProfile?
+    @Published var isLoading = true
+    @Published var fetchError: FetchError?
 
     // Navigation states
     @Published var isSheetPresented: Bool = false
     @Published var isPresentedFullScreenCover: Bool = false
 
-    // Global user input
+    // User input
     @Published var selectedLocality: Locality = Locality(id: 184, name: "Brno", district: "Brno-město")
     @Published var userYearOfBirth: Int = 1_999
 
+    // API url
     var ageStructureUrl: String = APIEndpoint.ageStructure.urlString
     var ageProfileUrl: String = APIEndpoint.ageProfile.urlString
 
@@ -32,6 +35,7 @@ class AppState: ObservableObject {
             let dataResponse: Response<AgeProfile> = try await DataService.shared.fetchData(from: ageProfileUrl)
             self.ageProfiles = dataResponse.features
         } catch {
+            fetchError = FetchError.invalidResponse
             throw FetchError.invalidResponse
         }
     }
@@ -41,6 +45,7 @@ class AppState: ObservableObject {
             let dataResponse: Response<AgeStructure> = try await DataService.shared.fetchData(from: ageStructureUrl)
             self.ageStructures = dataResponse.features
         } catch {
+            fetchError = FetchError.invalidResponse
             throw FetchError.invalidResponse
         }
     }
