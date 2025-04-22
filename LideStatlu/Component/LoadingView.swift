@@ -11,9 +11,11 @@ import SwiftUI
 struct LoadingView: View {
     @Environment(\.dismiss)
     var dismiss
+    @EnvironmentObject var appState: AppState
+
     @Binding var isVisible: Bool
-    @Binding var fetchError: FetchError?
-    @State private var isShowingAlert: Bool = true
+    @Binding var fetchError: FetchError
+    @Binding var isShowingErrorAlert: Bool
 
     var body: some View {
         VStack {
@@ -26,9 +28,9 @@ struct LoadingView: View {
                 .frame(width: 100, height: 200)
         }
         .padding(.horizontal)
-        .alert(fetchError?.errorDescription ?? "Něco se pokazilo", isPresented: $isShowingAlert) {
+        .alert(fetchError.errorDescription ?? "Něco se pokazilo", isPresented: $isShowingErrorAlert) {
             Button("OK", role: .cancel) {
-                fetchError = nil
+                fetchError = .noError
                 dismiss()
             }
             Button("Nastavení", role: .none) {
@@ -38,9 +40,27 @@ struct LoadingView: View {
                 dismiss()
             }
         }
+        .task {
+            do {
+                try await withThrowingTaskGroup(of: Void.self) { group in
+                    group.addTask {
+                        try await appState.loadAgeStructureData()
+                    }
+                    group.addTask {
+                        try await appState.loadAgeProfileData()
+                    }
+                    try await group.waitForAll()
+                }
+                appState.getLocalityNames()
+                appState.isLoading = false
+            } catch {
+                fetchError = .invalidResponse
+                appState.showErrorAlert()
+            }
+        }
     }
 }
 
 #Preview {
-    LoadingView(isVisible: .constant(true), fetchError: .constant(.invalidResponse))
+    LoadingView(isVisible: .constant(true), fetchError: .constant(.invalidResponse), isShowingErrorAlert: .constant(true))
 }

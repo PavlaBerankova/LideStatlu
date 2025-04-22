@@ -11,6 +11,7 @@ enum FetchError: Error {
     case invalidURL
     case invalidResponse
     case decodingFailed
+    case noError
 }
 
 extension FetchError: LocalizedError {
@@ -22,6 +23,8 @@ extension FetchError: LocalizedError {
             return "Data nelze načíst. Zkontroluj připojení k internetu."
         case .decodingFailed:
             return "Data se nepodařilo zpracovat. Zkus to prosím později."
+        default:
+            return nil
         }
     }
 }

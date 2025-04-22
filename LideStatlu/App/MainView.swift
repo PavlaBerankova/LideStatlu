@@ -24,31 +24,9 @@ struct MainView: View {
         .padding()
         .fullScreenCover(isPresented: $appState.isPresentedFullScreenCover) {
             if appState.isLoading {
-                LoadingView(isVisible: $appState.isLoading, fetchError: $appState.fetchError)
+                LoadingView(isVisible: $appState.isLoading, fetchError: $appState.fetchError, isShowingErrorAlert: $appState.isShowingErrorAlert)
             } else {
                 QueryFormView()
-            }
-        }
-        .task {
-            do {
-                try await withThrowingTaskGroup(of: Void.self) { group in
-                    group.addTask {
-                        try await appState.loadAgeStructureData()
-                    }
-
-                    group.addTask {
-                        try await appState.loadAgeProfileData()
-                    }
-
-                    // počká, dokud se nenačtou všechna data z obou skupin
-                    try await group.waitForAll()
-                }
-
-                // Pokud vše proběhlo OK
-                appState.getLocalityNames()
-                appState.isLoading = false
-            } catch {
-                print("Failed to load data. Check your connection.")
             }
         }
     }

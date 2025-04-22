@@ -16,7 +16,8 @@ class AppState: ObservableObject {
     @Published var filteredStructureData: AgeStructure?
     @Published var filteredProfileData: AgeProfile?
     @Published var isLoading = true
-    @Published var fetchError: FetchError?
+    @Published var fetchError: FetchError = .noError
+    @Published var isShowingErrorAlert: Bool = false
 
     // Navigation states
     @Published var isSheetPresented: Bool = false
@@ -94,5 +95,13 @@ class AppState: ObservableObject {
         self.isSheetPresented = true
         getFilteredAgeProfileData()
         getFilteredAgeStructureData()
+    }
+
+    func showErrorAlert() {
+        if fetchError == .noError {
+            self.isShowingErrorAlert = false
+        } else {
+            self.isShowingErrorAlert = true
+        }
     }
 }
