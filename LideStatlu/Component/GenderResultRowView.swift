@@ -11,9 +11,11 @@ struct GenderResultRowView: View {
     let title: String
     let femaleResult: String
     let maleResult: String
+    let subTitle: String?
+
+    let dotImage = Image(systemName: "circle.fill")
     let femaleImage = Image(systemName: "figure.stand.dress")
     let maleImage = Image(systemName: "figure.stand")
-    let subTitle: String?
 
     var body: some View {
         VStack {
@@ -45,20 +47,33 @@ struct GenderResultRowView: View {
 extension GenderResultRowView {
     private var femaleResultLine: some View {
         HStack {
-            femaleImage
-                .foregroundStyle(.accent)
+            if #available(iOS 18.0, *) {
+                femaleImage
+                    .foregroundStyle(.accent)
+            } else {
+                dotImage
+                    .font(.footnote)
+                    .foregroundStyle(.accent)
+            }
             Text(femaleResult)
         }
     }
 
     private var maleResultLine: some View {
         HStack {
-            maleImage
+            if #available(iOS 18.0, *) {
+                maleImage
+                    .foregroundStyle(.blue)
+            } else {
+                dotImage
+                    .foregroundStyle(.blue)
+                    .font(.footnote)
+            }
             Text(maleResult)
         }
     }
 }
 
-#Preview {
+#Preview() {
     GenderResultRowView(title: "V obci Brno žije celkem", femaleResult: "145 000 žen", maleResult: "156 000 mužů", subTitle: "(30-34 let)")
 }

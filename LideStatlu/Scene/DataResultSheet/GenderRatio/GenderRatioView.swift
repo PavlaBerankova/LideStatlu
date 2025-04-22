@@ -43,8 +43,8 @@ extension GenderRatioView {
     private var averageAge: some View {
         GenderResultRowView(
             title: "Průměrný věk je",
-            femaleResult: state.femaleAverageAge,
-            maleResult: state.maleAverageAge,
+            femaleResult: state.femaleAverageAge + " u žen",
+            maleResult: state.maleAverageAge + " u mužů",
             subTitle: nil)
     }
 
