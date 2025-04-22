@@ -13,47 +13,49 @@ struct MainView: View {
 
     var body: some View {
         VStack(alignment: .leading) {
-            Spacer()
-            HStack(alignment: .bottom) {
-                redLines
-                appName
-            }
+            symbolAndAppName
             appDescription
             nextScreenButton
         }
         .padding()
-        .fullScreenCover(isPresented: $appState.isPresentedFullScreenCover, content: QueryFormView.init)
-        .task {
-            do {
-                try await withThrowingTaskGroup(of: Void.self) { group in
-                    group.addTask {
-                        try await appState.loadAgeStructureData()
-                    }
-
-                    group.addTask {
-                        try await appState.loadAgeProfileData()
-                    }
-
-                    // počká se dokud se nenačtou všechna data z obou skupin
-                    try await group.waitForAll()
-                }
-
-                // Pokud vše proběhlo OK
-                appState.getLocalityNames()
-
-            } catch let error {
-                print("\(error): Failed to load data. Check your connection.")
+        .fullScreenCover(isPresented: $appState.isPresentedFullScreenCover) {
+            if appState.isLoading {
+                LoadingView(isVisible: $appState.isLoading, fetchError: $appState.fetchError, isShowingErrorAlert: $appState.isShowingErrorAlert)
+            } else {
+                QueryFormView()
             }
         }
     }
 }
 
 extension MainView {
+    private var symbolAndAppName: some View {
+        GeometryReader { geometry in
+            HStack(alignment: .bottom) {
+                Group {
+                    verticalRedLine(width: geometry.size.width * 0.1)
+                    verticalRedLine(width: geometry.size.width * 0.07)
+                        .frame(height: geometry.size.height * 0.60)
+                }
+                .padding([.top, .trailing])
+                VStack(alignment: .leading) {
+                    Text("Lidé")
+                        .foregroundStyle(.black)
+                    Text("v okolí")
+                        .foregroundStyle(.black)
+                    Text("Štatlu")
+                        .foregroundStyle(.accent)
+                }
+                .font(.system(size: geometry.size.height * 0.12, weight: .bold))
+            }
+        }
+        .padding(.bottom)
+    }
+
     private var redLines: some View {
         Group {
             verticalRedLine(width: 25)
             verticalRedLine(width: 20)
-                .frame(height: 200)
         }
         .padding([.top, .trailing])
     }
@@ -80,17 +82,12 @@ extension MainView {
 
     private var nextScreenButton: some View {
         Button {
-            appState.isPresentedFullScreenCover = true
+             appState.isPresentedFullScreenCover = true
         } label: {
-            Text("Pojďme na to")
+            Text("Hoď na to čučku")
                 .primaryButtonStyle()
                 .scaleEffect(isPressed ? 0.95 : 1.0)
-                       .animation(.easeOut(duration: 0.2), value: isPressed)
-                       .simultaneousGesture(
-                           DragGesture(minimumDistance: 0)
-                               .onChanged { _ in isPressed = true }
-                               .onEnded { _ in isPressed = false }
-                       )
+                .animation(.easeOut(duration: 0.2), value: isPressed)
         }
     }
 }

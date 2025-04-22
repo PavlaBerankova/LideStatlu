@@ -11,19 +11,24 @@ struct GenerationResultView: View {
     @ObservedObject var state: GenerationResultViewModel
 
     var body: some View {
-        VStack {
+        VStack(alignment: .center) {
+            localityName
             userGeneration
             userLocalityTotalPopulation
             userAgeGroupPopulation
             ageIndex
         }
-        .padding(.horizontal)
-        .navigationTitle(state.selectedLocality.name)
-        .navigationBarTitleDisplayMode(.inline)
+        .padding([.horizontal, .top])
+        Spacer()
     }
 }
 
 extension GenerationResultView {
+    private var localityName: some View {
+        Text(state.selectedLocality.name)
+            .resultViewTitleStyle()
+    }
+
     private var userGeneration: some View {
         TextResultRowView(
             title: "Patříš do generace",
@@ -34,7 +39,7 @@ extension GenerationResultView {
 
     private var userLocalityTotalPopulation: some View {
         TextResultRowView(
-            title: "V obci \(state.selectedLocality.name) žije celkem",
+            title: "Žije zde celkem",
             result: state.filteredAndFormattedPopulationData + " obyvatel",
             subTitle: nil
         )

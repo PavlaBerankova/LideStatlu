@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		44A2FCA02DB688770073ACD7 /* ActivityIndicatorView in Frameworks */ = {isa = PBXBuildFile; productRef = 44A2FC9F2DB688770073ACD7 /* ActivityIndicatorView */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		4409EA5F2DAF8C7F008B677D /* LideStatlu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LideStatlu.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -23,6 +27,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				44A2FCA02DB688770073ACD7 /* ActivityIndicatorView in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -66,6 +71,7 @@
 			);
 			name = LideStatlu;
 			packageProductDependencies = (
+				44A2FC9F2DB688770073ACD7 /* ActivityIndicatorView */,
 			);
 			productName = LideStatlu;
 			productReference = 4409EA5F2DAF8C7F008B677D /* LideStatlu.app */;
@@ -97,6 +103,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				4409EA702DAF8FC6008B677D /* XCRemoteSwiftPackageReference "SwiftLint" */,
+				44A2FC9E2DB688770073ACD7 /* XCRemoteSwiftPackageReference "ActivityIndicatorView" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 4409EA602DAF8C7F008B677D /* Products */;
@@ -277,6 +284,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"LideStatlu/Preview Content\"";
@@ -308,6 +316,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"LideStatlu/Preview Content\"";
@@ -366,7 +375,23 @@
 				minimumVersion = 0.59.1;
 			};
 		};
+		44A2FC9E2DB688770073ACD7 /* XCRemoteSwiftPackageReference "ActivityIndicatorView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/exyte/ActivityIndicatorView";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.2.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		44A2FC9F2DB688770073ACD7 /* ActivityIndicatorView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 44A2FC9E2DB688770073ACD7 /* XCRemoteSwiftPackageReference "ActivityIndicatorView" */;
+			productName = ActivityIndicatorView;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 4409EA572DAF8C7F008B677D /* Project object */;
 }

@@ -23,10 +23,9 @@ class DataService {
             }
             let decoder = JSONDecoder()
             let decodedResponse = try decoder.decode(Response<AgeDataType>.self, from: data)
-            if let dataString = String(data: data, encoding: .utf8) {
-                print("RECEIVED DATA: \(dataString)")
-            }
             return decodedResponse
+        } catch {
+            throw FetchError.decodingFailed
         }
     }
 }
