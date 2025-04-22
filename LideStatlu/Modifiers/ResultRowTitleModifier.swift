@@ -10,7 +10,7 @@ import SwiftUI
 struct ResultRowTitleModifier: ViewModifier {
     func body(content: Content) -> some View {
         content
-            .font(.title2)
+            .font(.title3)
             .lineLimit(2)
     }
 }

@@ -70,10 +70,10 @@ extension QueryFormView {
         Button {
             appState.showStatisticsSheet()
         } label: {
-            Text("Hoď na to čučku")
+            Text("Naval statistiky")
                 .primaryButtonStyle()
         }
-        .padding(.bottom)
+         .padding(.bottom)
     }
 
     private var dismissButton: some ToolbarContent {

@@ -10,7 +10,7 @@ import SwiftUI
 struct ResultRowValueModifier: ViewModifier {
     func body(content: Content) -> some View {
         content
-            .font(.title)
+            .font(.title2)
             .bold()
     }
 }

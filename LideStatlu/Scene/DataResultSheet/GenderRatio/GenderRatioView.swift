@@ -11,23 +11,30 @@ struct GenderRatioView: View {
     @ObservedObject var state: GenderRatioViewModel
 
     var body: some View {
-        VStack {
+        VStack(alignment: .center) {
+            localityName
             totalPopulationByGender
             averageAge
             totalAverageAge
-                .padding(.bottom)
+            Spacer()
+
             tryAgainButton
+                .padding(.bottom)
         }
-        .padding(.horizontal)
-        .navigationTitle(state.selectedLocality.name)
-        .navigationBarTitleDisplayMode(.inline)
+        .padding()
+        Spacer()
     }
 }
 
 extension GenderRatioView {
+    private var localityName: some View {
+        Text(state.selectedLocality.name)
+            .resultViewTitleStyle()
+    }
+
     private var totalPopulationByGender: some View {
         GenderResultRowView(
-            title: "V obci \(state.selectedLocality.name) žije",
+            title: "Žije zde",
             femaleResult: state.femalePopulation,
             maleResult: state.malePopulation,
             subTitle: nil)
@@ -35,7 +42,7 @@ extension GenderRatioView {
 
     private var averageAge: some View {
         GenderResultRowView(
-            title: "Průměrný věk",
+            title: "Průměrný věk je",
             femaleResult: state.femaleAverageAge,
             maleResult: state.maleAverageAge,
             subTitle: nil)
@@ -45,7 +52,9 @@ extension GenderRatioView {
         TextResultRowView(
             title: "Celkový průměrný věk",
             result: state.totalAverageAge,
-            subTitle: nil)
+            subTitle: nil
+        )
+        .padding(.bottom)
     }
 
     private var tryAgainButton: some View {
@@ -54,11 +63,11 @@ extension GenderRatioView {
         } label: {
             HStack {
                 Image(systemName: "arrow.clockwise")
-                Text("Zkus to znovu")
+                Text("Dáme repete")
             }
             .primaryButtonStyle()
         }
-        .padding(.top)
+        .padding(.bottom)
     }
 }
 
