@@ -3,8 +3,8 @@
 ## Statistiky obcí v metropolitní oblasti Brna
 
 **Použité datasety**
-- [věková struktura -]() počet obyvatel dle věkových skupin
-- [věková charakteristika -]() počet obyvatel dle pohlaví a věku
+- [věková struktura -](https://data.brno.cz/datasets/mestobrno::v%C4%9Bkov%C3%A1-struktura-a-index-st%C3%A1%C5%99%C3%AD-v-obc%C3%ADch-bmo-age-structure-and-age-index-in-bma-municipal/explore?location=0.039516%2C16.635582%2C0.00&showTable=true) počet obyvatel dle věkových skupin
+- [věková charakteristika -](https://data.brno.cz/datasets/mestobrno::v%C4%9Bkov%C3%A9-charakteristiky-obyvatelstva-bmo-age-characteristics-of-the-population-of-bma/explore?location=0.000004%2C16.635582%2C0.00&showTable=true) počet obyvatel dle pohlaví a věku
 
   <img src="https://github.com/user-attachments/assets/e5226e04-d7fb-4c40-b2e0-6d4c1e3f022d" alt="" width="200" />
   <img src="https://github.com/user-attachments/assets/cc0bc3a8-a44c-4deb-8db3-176c31c93f4e" alt="" width="200" />
