@@ -50,9 +50,13 @@ class GenerationResultViewModel: ObservableObject {
         appState.filteredStructureData?.attributes.totalPopulation?.formattedWithSeparator() ?? "-"
     }
 
-    var populationByUserAgeGroup: String {
-        let populationAgeGroup = appState.filteredStructureData?.attributes.getPopulation(by: userAge)
-        return populationAgeGroup?.formattedWithSeparator() ?? "-"
+    var populationByUserAgeGroup: (String, String) {
+        let populationAgeGroup = appState.filteredStructureData?.attributes.populationAgeGroup(by: userAge)
+
+        if let ageGroupCount = populationAgeGroup?.0, let ageGroupTitle = populationAgeGroup?.1 {
+            return (ageGroupCount.formattedWithSeparator(), ageGroupTitle)
+        }
+        return ("-", "-")
     }
 
     func getUserGeneration() -> Generation {

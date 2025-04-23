@@ -54,8 +54,8 @@ extension GenerationResultView {
     private var userAgeGroupPopulation: some View {
         TextResultRowView(
             title: "Z toho je ve tvé věkové skupině",
-            result: state.populationByUserAgeGroup + " obyvatel",
-            subTitle: nil
+            result: state.populationByUserAgeGroup.0 + " obyvatel",
+            subTitle: state.populationByUserAgeGroup.1
         )
     }
 
