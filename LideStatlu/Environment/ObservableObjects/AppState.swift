@@ -85,9 +85,7 @@ class AppState: ObservableObject {
         return currentYear - userYearOfBirth
     }
 
-    func resetQueryForm() {
-        self.selectedLocality = .init(id: 184, name: "Brno", district: "Brno-město")
-        self.userYearOfBirth = .init(1_999)
+    func backToQueryForm() {
         self.isSheetPresented = false
     }
 
