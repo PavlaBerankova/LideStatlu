@@ -38,7 +38,7 @@ enum Generation: String {
     var title: String {
         switch self {
         case .genSilent:
-            return "Tichá generace"
+            return "tzv. Tichá generace"
         case .genBabyBoomers:
             return "Baby Boomers"
         case .genX:
@@ -46,7 +46,7 @@ enum Generation: String {
         case .genY:
             return "Y - Mileniálové"
         case .genZ:
-            return "Z"
+            return "Z - internetová generace"
         case .genAlpha:
             return "Alpha"
         case .none:

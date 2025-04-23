@@ -66,48 +66,48 @@ struct AgeStructAttributes: Codable {
 }
 
 extension AgeStructAttributes {
-    var age0to4Title: String { "0–4 roky" }
-    var age5to9Title: String { "5–9 let" }
-    var age10to14Title: String { "10–14 let" }
-    var age15to19Title: String { "15–19 let" }
-    var age20to24Title: String { "20–24 let" }
-    var age25to29Title: String { "25–29 let" }
-    var age30to34Title: String { "30–34 let" }
-    var age35to39Title: String { "35–39 let" }
-    var age40to44Title: String { "40–44 let" }
-    var age45to49Title: String { "45–49 let" }
-    var age50to54Title: String { "50–54 let" }
-    var age55to59Title: String { "55–59 let" }
-    var age60to64Title: String { "60–64 let" }
-    var age65to69Title: String { "65–69 let" }
-    var age70to74Title: String { "70–74 let" }
-    var age75to79Title: String { "75–79 let" }
-    var age80to84Title: String { "80–84 let" }
-    var age85to89Title: String { "85–89 let" }
-    var age90plusTitle: String { "90 a více let" }
-
-    func getPopulation(by userAge: Int) -> Int? {
+    func populationAgeGroup(by userAge: Int) -> (Int?, String?) {
         switch userAge {
-        case 0...4: return age0to4
-        case 5...9: return age5to9
-        case 10...14: return age10to14
-        case 15...19: return age15to19
-        case 20...24: return age20to24
-        case 25...29: return age25to29
-        case 30...34: return age30to34
-        case 35...39: return age35to39
-        case 40...44: return age40to44
-        case 45...49: return age45to49
-        case 50...54: return age50to54
-        case 55...59: return age55to59
-        case 60...64: return age60to64
-        case 65...69: return age65to69
-        case 70...74: return age70to74
-        case 75...79: return age70to74
-        case 80...84: return age80to84
-        case 85...89: return age85to89
-        case 90...: return age90plus
-        default: return nil
+        case 0...4:
+            return (age0to4, "(0–4 roky)")
+        case 5...9:
+            return (age5to9, "(5–9 let)")
+        case 10...14:
+            return (age10to14, "(10–14 let)")
+        case 15...19:
+            return (age15to19, "(15–19 let)")
+        case 20...24:
+            return (age20to24, "(20–24 let)")
+        case 25...29:
+            return (age25to29, "(25-29 let)")
+        case 30...34:
+            return (age30to34, "(30–34 let)")
+        case 35...39:
+            return (age35to39, "(35–39 let)")
+        case 40...44:
+            return (age40to44, "(40-44 let)")
+        case 45...49:
+            return (age45to49, "(45–49 let)")
+        case 50...54:
+            return (age50to54, "(50–54 let)")
+        case 55...59:
+            return (age55to59, "(55-59 let)")
+        case 60...64:
+            return (age60to64, "(60–64 let)")
+        case 65...69:
+            return (age65to69, "(65–69 let)")
+        case 70...74:
+            return (age70to74, "(70-74 let)")
+        case 75...79:
+            return (age75to79, "(75–79 let)")
+        case 80...84:
+            return (age80to84, "(80–84 let)")
+        case 85...89:
+            return (age85to89, "(85-89 let)")
+        case 90...:
+            return (age90plus, "(90+ let)")
+        default:
+            return (nil, nil)
         }
     }
 }

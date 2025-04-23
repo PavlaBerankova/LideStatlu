@@ -13,6 +13,8 @@ struct GenerationResultView: View {
     var body: some View {
         VStack(alignment: .center) {
             localityName
+            Divider()
+            headerRow
             userGeneration
             userLocalityTotalPopulation
             userAgeGroupPopulation
@@ -29,9 +31,13 @@ extension GenerationResultView {
             .resultViewTitleStyle()
     }
 
+    private var headerRow: some View {
+        HeaderResultView(title: "Struktura obyvatel")
+    }
+
     private var userGeneration: some View {
         TextResultRowView(
-            title: "Patříš do generace",
+            title: "Máš \(state.userAge) let a patříš do generace",
             result: state.userGenerationTitle,
             subTitle: state.userGenerationYearRange
         )
@@ -39,7 +45,7 @@ extension GenerationResultView {
 
     private var userLocalityTotalPopulation: some View {
         TextResultRowView(
-            title: "Žije zde celkem",
+            title: "Obec má celkem",
             result: state.filteredAndFormattedPopulationData + " obyvatel",
             subTitle: nil
         )
@@ -47,9 +53,9 @@ extension GenerationResultView {
 
     private var userAgeGroupPopulation: some View {
         TextResultRowView(
-            title: "Z toho je ve tvé věkové kategorii",
-            result: state.populationByUserAgeGroup + " obyvatel",
-            subTitle: nil
+            title: "Z toho je ve tvé věkové skupině",
+            result: state.populationByUserAgeGroup.0 + " obyvatel",
+            subTitle: state.populationByUserAgeGroup.1
         )
     }
 

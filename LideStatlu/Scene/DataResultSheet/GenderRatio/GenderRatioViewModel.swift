@@ -56,7 +56,49 @@ class GenderRatioViewModel: ObservableObject {
         return "-"
     }
 
+    var femaleGroup0to14: String {
+        if let female0to14 = appState.filteredProfileData?.attributes.femaleAgeGroup0to14 {
+            return female0to14.formattedWithSeparator()
+        }
+        return "-"
+    }
+
+    var femaleGroup15to64: String {
+        if let female15to64 = appState.filteredProfileData?.attributes.femaleAgeGroup15to64 {
+            return female15to64.formattedWithSeparator()
+        }
+        return "-"
+    }
+
+    var femaleGroup65plus: String {
+        if let female65plus = appState.filteredProfileData?.attributes.femaleAgeGroup65plus {
+            return female65plus.formattedWithSeparator()
+        }
+        return "-"
+    }
+
+    var maleGroup0to14: String {
+        if let male0to14 = appState.filteredProfileData?.attributes.maleAgeGroup0to14 {
+            return male0to14.formattedWithSeparator()
+        }
+        return "-"
+    }
+
+    var maleGroup15to64: String {
+        if let male15to64 = appState.filteredProfileData?.attributes.maleAgeGroup15to64 {
+            return male15to64.formattedWithSeparator()
+        }
+        return "-"
+    }
+
+    var maleGroup65plus: String {
+        if let male65plus = appState.filteredProfileData?.attributes.maleAgeGroup65plus {
+            return male65plus.formattedWithSeparator()
+        }
+        return "-"
+    }
+
     func tryAgainButtonTapped() {
-        appState.resetQueryForm()
+        appState.backToQueryForm()
     }
 }

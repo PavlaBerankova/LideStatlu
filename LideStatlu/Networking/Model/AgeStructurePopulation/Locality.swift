@@ -12,9 +12,3 @@ struct Locality: Hashable, Equatable {
     let name: String
     let district: String
 }
-
-extension Locality {
-    static func ==(lhs: Locality, rhs: Locality) -> Bool {
-        return lhs.id == rhs.id
-    }
-}
