@@ -17,5 +17,12 @@
   <img src="https://github.com/user-attachments/assets/21d39c5c-d775-4b6f-929f-e55c32940eec" alt="" width="200" />
   <img src="https://github.com/user-attachments/assets/d6c197ca-4ce8-4d63-ba35-8dd2301ca137" alt="" width="200" />
   <img src="https://github.com/user-attachments/assets/6b89f1c7-4dd7-4088-bdb6-945181f35d7b" alt="" width="200" />
+
+  ## iPad - screenshots
+  
+  <img src="https://github.com/user-attachments/assets/6f3cac84-7958-4d14-82b5-3c565847076c" alt="" width="400" />
+  <img src="https://github.com/user-attachments/assets/eb50096d-2de9-42b1-809c-67f031787f05" alt="" width="400" />
+  <img src="https://github.com/user-attachments/assets/f53da376-4c23-48c6-824a-6dfa1ea269b5" alt="" width="400" />
+  <img src="https://github.com/user-attachments/assets/92f88cd1-1bbe-419a-9873-4d24c8ce87b7" alt="" width="400" />
   
 
