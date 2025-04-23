@@ -1,4 +1,5 @@
-# Lidé Štatlu - mobilní aplikace pro iOS
+# <img src="https://github.com/user-attachments/assets/6bc52aeb-14eb-4011-a976-53147967a16b" alt="AppIcon" width="50" height="50" />  Lidé Štatlu
+#### - mobilní aplikace pro iOS
 
 ## Statistiky obcí v metropolitní oblasti Brna
 
@@ -17,3 +18,4 @@
   <img src="https://github.com/user-attachments/assets/d6c197ca-4ce8-4d63-ba35-8dd2301ca137" alt="" width="200" />
   <img src="https://github.com/user-attachments/assets/6b89f1c7-4dd7-4088-bdb6-945181f35d7b" alt="" width="200" />
   
+![AppIcon~ios-marketing]()
