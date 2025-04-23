@@ -25,7 +25,7 @@ class AppState: ObservableObject {
 
     // User input
     @Published var selectedLocality: Locality = Locality(id: 184, name: "Brno", district: "Brno-město")
-    @Published var userYearOfBirth: Int = 1_999
+    @Published var userYearOfBirth: Int = 2_000
 
     // API url
     var ageStructureUrl: String = APIEndpoint.ageStructure.urlString

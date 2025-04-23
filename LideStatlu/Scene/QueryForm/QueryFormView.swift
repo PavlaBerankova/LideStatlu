@@ -35,11 +35,15 @@ struct QueryFormView: View {
 extension QueryFormView {
     private var agePickerSection: some View {
         Section {
+            let currentYear = Calendar.current.component(.year, from: Date())
+            let years = 1_925...currentYear
+
             Picker("Rok narození", selection: $appState.userYearOfBirth) {
                 ForEach(years, id: \.self) { year in
-                    Text(String(year))
+                    Text(String(year)).tag(year)
                 }
             }
+            .pickerStyle(.wheel)
         } header: {
             Text("Kdy ses narodil?")
                 .font(.title2)
