@@ -49,11 +49,10 @@ extension GenderResultRowView {
         HStack {
             if #available(iOS 18.0, *) {
                 femaleImage
-                    .foregroundStyle(.accent)
+                    .genderSymbolStyle(isFigure: true, isFemale: true)
             } else {
                 dotImage
-                    .font(.footnote)
-                    .foregroundStyle(.accent)
+                    .genderSymbolStyle(isFigure: false, isFemale: true)
             }
             Text(femaleResult)
         }
@@ -63,11 +62,10 @@ extension GenderResultRowView {
         HStack {
             if #available(iOS 18.0, *) {
                 maleImage
-                    .foregroundStyle(.blue)
+                    .genderSymbolStyle(isFigure: true, isFemale: false)
             } else {
                 dotImage
-                    .foregroundStyle(.blue)
-                    .font(.footnote)
+                    .genderSymbolStyle(isFigure: false, isFemale: false)
             }
             Text(maleResult)
         }
