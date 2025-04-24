@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct MainView: View {
-    @State private var isPressed = false // only for button animation
+    @State private var isPressed = false
     @EnvironmentObject var appState: AppState
 
     var body: some View {

@@ -11,7 +11,7 @@ extension Int {
     func formattedWithSeparator() -> String {
          let formatter = NumberFormatter()
          formatter.numberStyle = .decimal
-         formatter.locale = Locale(identifier: "cs_CZ") // česká lokalizace
-         return formatter.string(from: NSNumber(value: self)) ?? "\(self)"
+         formatter.locale = Locale(identifier: "cs_CZ")
+         return formatter.string(from: NSNumber(value: self)) ?? "\(self)" // 400000 -> 400 000
      }
 }
