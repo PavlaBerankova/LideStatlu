@@ -27,14 +27,16 @@ class AppState: ObservableObject {
     @Published var selectedLocality: Locality = Locality(id: 184, name: "Brno", district: "Brno-město")
     @Published var userYearOfBirth: Int = 2_000
 
-    // API url
-    var ageStructureUrl: String = APIEndpoint.ageStructure.urlString
-    var ageProfileUrl: String = APIEndpoint.ageProfile.urlString
+    private let dataProvider: DataProvider
+
+      init(dataProvider: DataProvider = MockDataProvider()) {
+          self.dataProvider = dataProvider
+      }
 
     func loadAgeProfileData() async throws {
         do {
-            let dataResponse: Response<AgeProfile> = try await DataService.shared.fetchData(from: ageProfileUrl)
-            self.ageProfiles = dataResponse.features
+            let dataResponse = try await dataProvider.fetchAgeProfileData()
+            self.ageProfiles = dataResponse
         } catch {
             fetchError = FetchError.invalidResponse
             throw FetchError.invalidResponse
@@ -43,8 +45,8 @@ class AppState: ObservableObject {
 
     func loadAgeStructureData() async throws {
         do {
-            let dataResponse: Response<AgeStructure> = try await DataService.shared.fetchData(from: ageStructureUrl)
-            self.ageStructures = dataResponse.features
+            let dataResponse = try await dataProvider.fetchAgeStructureData()
+            self.ageStructures = dataResponse
         } catch {
             fetchError = FetchError.invalidResponse
             throw FetchError.invalidResponse
