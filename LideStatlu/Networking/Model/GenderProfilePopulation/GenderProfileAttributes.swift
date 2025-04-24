@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct AgeProfileAttributes: Codable {
+struct GenderProfileAttributes: Codable {
     let id: Int
     let localityCode: String
     let localityName: String
@@ -15,9 +15,6 @@ struct AgeProfileAttributes: Codable {
     // All population
     let totalPopulation: Int?
     let averageAge: Double?
-    let ageGroup0to14: Int?
-    let ageGroup15to64: Int?
-    let ageGroup65plus: Int?
 
     // Male population
     let malePopulation: Int?
@@ -41,9 +38,6 @@ struct AgeProfileAttributes: Codable {
         // All population
         case totalPopulation = "Celkem"
         case averageAge = "Průměrný_věk"
-        case ageGroup0to14 = "F0_14"
-        case ageGroup15to64 = "F15_64"
-        case ageGroup65plus = "F65_a_vice"
 
         // Male population
         case malePopulation = "Muži"

@@ -7,19 +7,16 @@
 
 import Foundation
 
-extension AgeProfile {
-    static let mock: [AgeProfile] = [
-        AgeProfile(
-            attributes: AgeProfileAttributes(
+extension GenderProfile {
+    static let mock: [GenderProfile] = [
+        GenderProfile(
+            attributes: GenderProfileAttributes(
                 id: 172,
                 localityCode: "583782",
                 localityName: "Rosice",
                 totalPopulation: 6_738,
                 averageAge: 40.275601068566338,
-                ageGroup0to14: 1_342,
-                ageGroup15to64: 4_233,
-                ageGroup65plus: 1_163,
-                malePopulation: 3_268,
+                malePopulation: 1_342,
                 maleAverageAge: 38.85342717258262,
                 maleAgeGroup0to14: 681,
                 maleAgeGroup15to64: 2_111,
@@ -31,16 +28,13 @@ extension AgeProfile {
                 femaleAgeGroup65plus: 687
             )
         ),
-        AgeProfile(
-            attributes: AgeProfileAttributes(
+        GenderProfile(
+            attributes: GenderProfileAttributes(
                 id: 184,
                 localityCode: "582786",
                 localityName: "Brno",
                 totalPopulation: 400_566,
                 averageAge: 42.582852763339872,
-                ageGroup0to14: 62_613,
-                ageGroup15to64: 256_067,
-                ageGroup65plus: 81_886,
                 malePopulation: 194_046,
                 maleAverageAge: 40.813245312967027,
                 maleAgeGroup0to14: 32_071,
@@ -53,16 +47,13 @@ extension AgeProfile {
                 femaleAgeGroup65plus: 48_660
             )
         ),
-        AgeProfile(
-            attributes: AgeProfileAttributes(
+        GenderProfile(
+            attributes: GenderProfileAttributes(
                 id: 77,
                 localityCode: "583481",
                 localityName: "Neslovice",
                 totalPopulation: 994,
                 averageAge: 39.766599597585511,
-                ageGroup0to14: 187,
-                ageGroup15to64: 666,
-                ageGroup65plus: 141,
                 malePopulation: 490,
                 maleAverageAge: 38.922448979591834,
                 maleAgeGroup0to14: 94,

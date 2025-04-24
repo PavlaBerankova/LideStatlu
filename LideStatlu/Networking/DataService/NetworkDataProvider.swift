@@ -16,8 +16,8 @@ class NetworkDataProvider: DataProvider {
         return response.features
     }
 
-    func fetchAgeProfileData() async throws -> [AgeProfile] {
-        let response: Response<AgeProfile> = try await fetchData(from: ageProfileUrl)
+    func fetchAgeProfileData() async throws -> [GenderProfile] {
+        let response: Response<GenderProfile> = try await fetchData(from: ageProfileUrl)
         return response.features
     }
 

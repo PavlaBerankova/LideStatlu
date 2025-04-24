@@ -13,8 +13,8 @@ class MockDataProvider: DataProvider {
         return AgeStructure.mock
     }
 
-    func fetchAgeProfileData() async throws -> [AgeProfile] {
+    func fetchAgeProfileData() async throws -> [GenderProfile] {
         try await Task.sleep(nanoseconds: 500_000_000)
-        return AgeProfile.mock
+        return GenderProfile.mock
     }
 }
