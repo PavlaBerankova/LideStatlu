@@ -6,6 +6,9 @@
 //
 
 import Foundation
+import os
+
+let logger = Logger()
 
 @MainActor
 class AppState: ObservableObject {
@@ -27,9 +30,12 @@ class AppState: ObservableObject {
     @Published var selectedLocality: Locality = Locality(id: 184, name: "Brno", district: "Brno-město")
     @Published var userYearOfBirth: Int = 2_000
 
+    // Search
+    @Published var searchText: String = String()
+
     private let dataProvider: DataProvider
 
-      init(dataProvider: DataProvider = MockDataProvider()) {
+      init(dataProvider: DataProvider = NetworkDataProvider()) {
           self.dataProvider = dataProvider
       }
 
@@ -54,17 +60,23 @@ class AppState: ObservableObject {
     }
 
     func getFilteredAgeStructureData() {
-        let filteredData = ageStructures.filter {
-            $0.attributes.id == selectedLocality.id
-        }
-        self.filteredStructureData = filteredData.first
+            let filteredData = ageStructures.filter {
+                $0.attributes.id == selectedLocality.id
+            }
+            self.filteredStructureData = filteredData.first
     }
 
     func getFilteredAgeProfileData() {
-        let filteredData = ageProfiles.filter {
-            $0.attributes.id == selectedLocality.id
-        }
-        self.filteredProfileData = filteredData.first
+            let filteredData = ageProfiles.filter {
+                $0.attributes.id == selectedLocality.id
+            }
+            self.filteredProfileData = filteredData.first
+    }
+
+    func getSearchedLocality() -> [Locality] {
+        let localityFields = localityNames
+        let filtered = localityFields.filter { $0.name.lowercased().contains(searchText.lowercased()) }
+        return filtered
     }
 
     func getLocalityNames() {
@@ -78,12 +90,12 @@ class AppState: ObservableObject {
             $0.name.compare($1.name, locale: Locale(identifier: "cs_CZ")) == .orderedAscending
         }
         localityNames = sortedNames
+        logger.log("Locality names: type Locality: \(sortedNames)")
     }
 
     func getUserAgeByYearOfBirth() -> Int {
         let currentYear: Int = Calendar.current.component(.year, from: Date())
         let userYearOfBirth: Int = self.userYearOfBirth
-        print(currentYear - userYearOfBirth)
         return currentYear - userYearOfBirth
     }
 

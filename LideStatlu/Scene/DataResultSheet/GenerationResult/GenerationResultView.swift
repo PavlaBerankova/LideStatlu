@@ -13,9 +13,9 @@ struct GenerationResultView: View {
     var body: some View {
         VStack(alignment: .center) {
             localityName
+            userGeneration
             Divider()
             headerRow
-            userGeneration
             userLocalityTotalPopulation
             userAgeGroupPopulation
             ageIndex
@@ -37,7 +37,7 @@ extension GenerationResultView {
 
     private var userGeneration: some View {
         TextResultRowView(
-            title: "Máš \(state.userAge) let a patříš do generace",
+            title: "Je ti \(state.userAge) let a patříš do generace",
             result: state.userGenerationTitle,
             subTitle: state.userGenerationYearRange
         )

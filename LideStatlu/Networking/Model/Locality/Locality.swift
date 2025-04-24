@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Locality: Hashable, Equatable {
+struct Locality: Hashable, Identifiable {
     let id: Int
     let name: String
     let district: String

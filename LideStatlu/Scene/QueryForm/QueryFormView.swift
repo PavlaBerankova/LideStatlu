@@ -14,7 +14,7 @@ struct QueryFormView: View {
         NavigationStack {
             Form {
                 agePickerSection
-                localitySection
+                searchableListLocality
             }
             VStack(alignment: .leading) {
                 showStatisticsSheetButton
@@ -45,10 +45,21 @@ extension QueryFormView {
             }
             .pickerStyle(.wheel)
         } header: {
-            Text("Kdy ses narodil?")
-                .font(.title2)
-                .bold()
-                .foregroundStyle(.black)
+            Text("Rok narození")
+                .headerTextStyle()
+        }
+    }
+
+    private var searchableListLocality: some View {
+        Section {
+            NavigationLink {
+                LocalityListView()
+            } label: {
+                LocalityTitleRow(title: "Obec", locality: appState.selectedLocality)
+            }
+        } header: {
+            Text("Vyber oblast")
+                .headerTextStyle()
         }
     }
 
