@@ -9,5 +9,5 @@ import Foundation
 
 protocol DataProvider {
     func fetchAgeStructureData() async throws -> [AgeStructure]
-    func fetchAgeProfileData() async throws -> [GenderProfile]
+    func fetchGenderProfileData() async throws -> [GenderProfile]
 }

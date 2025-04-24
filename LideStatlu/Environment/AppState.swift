@@ -14,10 +14,10 @@ let logger = Logger()
 class AppState: ObservableObject {
     // State
     @Published var ageStructures: [AgeStructure] = []
-    @Published var ageProfiles: [GenderProfile] = []
+    @Published var genderProfiles: [GenderProfile] = []
     @Published var localityNames: [Locality] = []
     @Published var filteredStructureData: AgeStructure?
-    @Published var filteredProfileData: GenderProfile?
+    @Published var filteredGenderData: GenderProfile?
     @Published var isLoading = true
     @Published var fetchError: FetchError = .noError
     @Published var isShowingErrorAlert: Bool = false
@@ -39,10 +39,10 @@ class AppState: ObservableObject {
           self.dataProvider = dataProvider
       }
 
-    func loadAgeProfileData() async throws {
+    func loadGenderProfileData() async throws {
         do {
-            let dataResponse = try await dataProvider.fetchAgeProfileData()
-            self.ageProfiles = dataResponse
+            let dataResponse = try await dataProvider.fetchGenderProfileData()
+            self.genderProfiles = dataResponse
         } catch {
             fetchError = FetchError.invalidResponse
             throw FetchError.invalidResponse
@@ -66,11 +66,11 @@ class AppState: ObservableObject {
             self.filteredStructureData = filteredData.first
     }
 
-    func getFilteredAgeProfileData() {
-            let filteredData = ageProfiles.filter {
+    func getFiltereGenderProfileData() {
+            let filteredData = genderProfiles.filter {
                 $0.attributes.id == selectedLocality.id
             }
-            self.filteredProfileData = filteredData.first
+            self.filteredGenderData = filteredData.first
     }
 
     func getSearchedLocality() -> [Locality] {
@@ -105,7 +105,7 @@ class AppState: ObservableObject {
 
     func showStatisticsSheet() {
         self.isSheetPresented = true
-        getFilteredAgeProfileData()
+        getFiltereGenderProfileData()
         getFilteredAgeStructureData()
     }
 

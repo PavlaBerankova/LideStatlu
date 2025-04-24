@@ -9,15 +9,15 @@ import Foundation
 
 class NetworkDataProvider: DataProvider {
     let ageStructureUrl = APIEndpoint.ageStructure.urlString
-    let ageProfileUrl = APIEndpoint.ageProfile.urlString
+    let genderProfileUrl = APIEndpoint.genderProfile.urlString
 
     func fetchAgeStructureData() async throws -> [AgeStructure] {
         let response: Response<AgeStructure> = try await fetchData(from: ageStructureUrl)
         return response.features
     }
 
-    func fetchAgeProfileData() async throws -> [GenderProfile] {
-        let response: Response<GenderProfile> = try await fetchData(from: ageProfileUrl)
+    func fetchGenderProfileData() async throws -> [GenderProfile] {
+        let response: Response<GenderProfile> = try await fetchData(from: genderProfileUrl)
         return response.features
     }
 

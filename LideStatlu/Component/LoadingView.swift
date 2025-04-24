@@ -47,7 +47,7 @@ struct LoadingView: View {
                         try await appState.loadAgeStructureData()
                     }
                     group.addTask {
-                        try await appState.loadAgeProfileData()
+                        try await appState.loadGenderProfileData()
                     }
                     try await group.waitForAll()
                 }

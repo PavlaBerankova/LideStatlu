@@ -20,7 +20,7 @@ class GenderRatioViewModel: ObservableObject {
     }
 
     var femalePopulation: String {
-        if let femaleCount = appState.filteredProfileData?.attributes.femalePopulation {
+        if let femaleCount = appState.filteredGenderData?.attributes.femalePopulation {
             let formattedFemaleCount = femaleCount.formattedWithSeparator()
             return formattedFemaleCount + " žen"
         }
@@ -28,7 +28,7 @@ class GenderRatioViewModel: ObservableObject {
     }
 
     var malePopulation: String {
-        if let maleCount = appState.filteredProfileData?.attributes.malePopulation {
+        if let maleCount = appState.filteredGenderData?.attributes.malePopulation {
             let formattedMaleCount = maleCount.formattedWithSeparator()
             return formattedMaleCount + " mužů"
         }
@@ -36,63 +36,63 @@ class GenderRatioViewModel: ObservableObject {
     }
 
     var femaleAverageAge: String {
-        if let femaleAverageAge = appState.filteredProfileData?.attributes.femaleAverageAge {
+        if let femaleAverageAge = appState.filteredGenderData?.attributes.femaleAverageAge {
             return String(Int(femaleAverageAge)) + " let"
         }
         return "-"
     }
 
     var maleAverageAge: String {
-        if let maleAverageAge = appState.filteredProfileData?.attributes.maleAverageAge {
+        if let maleAverageAge = appState.filteredGenderData?.attributes.maleAverageAge {
             return  String(Int(maleAverageAge)) + " let"
         }
         return "-"
     }
 
     var totalAverageAge: String {
-        if let allAverageAge = appState.filteredProfileData?.attributes.averageAge {
+        if let allAverageAge = appState.filteredGenderData?.attributes.averageAge {
             return String(Int(allAverageAge)) + " let"
         }
         return "-"
     }
 
     var femaleGroup0to14: String {
-        if let female0to14 = appState.filteredProfileData?.attributes.femaleAgeGroup0to14 {
+        if let female0to14 = appState.filteredGenderData?.attributes.femaleAgeGroup0to14 {
             return female0to14.formattedWithSeparator()
         }
         return "-"
     }
 
     var femaleGroup15to64: String {
-        if let female15to64 = appState.filteredProfileData?.attributes.femaleAgeGroup15to64 {
+        if let female15to64 = appState.filteredGenderData?.attributes.femaleAgeGroup15to64 {
             return female15to64.formattedWithSeparator()
         }
         return "-"
     }
 
     var femaleGroup65plus: String {
-        if let female65plus = appState.filteredProfileData?.attributes.femaleAgeGroup65plus {
+        if let female65plus = appState.filteredGenderData?.attributes.femaleAgeGroup65plus {
             return female65plus.formattedWithSeparator()
         }
         return "-"
     }
 
     var maleGroup0to14: String {
-        if let male0to14 = appState.filteredProfileData?.attributes.maleAgeGroup0to14 {
+        if let male0to14 = appState.filteredGenderData?.attributes.maleAgeGroup0to14 {
             return male0to14.formattedWithSeparator()
         }
         return "-"
     }
 
     var maleGroup15to64: String {
-        if let male15to64 = appState.filteredProfileData?.attributes.maleAgeGroup15to64 {
+        if let male15to64 = appState.filteredGenderData?.attributes.maleAgeGroup15to64 {
             return male15to64.formattedWithSeparator()
         }
         return "-"
     }
 
     var maleGroup65plus: String {
-        if let male65plus = appState.filteredProfileData?.attributes.maleAgeGroup65plus {
+        if let male65plus = appState.filteredGenderData?.attributes.maleAgeGroup65plus {
             return male65plus.formattedWithSeparator()
         }
         return "-"
