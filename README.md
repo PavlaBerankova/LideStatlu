@@ -11,12 +11,12 @@
 
   <img src="https://github.com/user-attachments/assets/9d800979-644c-4213-a742-2fd85a64507c" alt="" width="200" />
   <img src="https://github.com/user-attachments/assets/e24ff3cb-1e61-43ce-988c-cd26e0720fb3" alt="" width="200" />
-  <img src="https://github.com/user-attachments/assets/7460e45c-c539-4fd9-b161-48f9b7e05612" alt="" width="200" />
-  <img src="https://github.com/user-attachments/assets/7b12d1fa-b8e5-446e-98b0-171c3295b49e" alt="" width="200" />
-  <img src="https://github.com/user-attachments/assets/0a479231-8323-41c0-805e-98ee095e8b63" alt="" width="200" />
-  <img src="https://github.com/user-attachments/assets/21d39c5c-d775-4b6f-929f-e55c32940eec" alt="" width="200" />
-  <img src="https://github.com/user-attachments/assets/d6c197ca-4ce8-4d63-ba35-8dd2301ca137" alt="" width="200" />
-  <img src="https://github.com/user-attachments/assets/6b89f1c7-4dd7-4088-bdb6-945181f35d7b" alt="" width="200" />
+  <img src="https://github.com/user-attachments/assets/287bfe77-2548-4f18-bfce-d329d742c957" alt="" width="200" />
+  <img src="https://github.com/user-attachments/assets/aa641307-ac3e-4174-aecf-62e609cd2119" alt="" width="200" />
+  <img src="https://github.com/user-attachments/assets/eb9a5f9b-438f-4317-a21e-009487640d96" alt="" width="200" />
+  <img src="https://github.com/user-attachments/assets/b66cb9d6-2de3-4390-bb1d-615eb41c1619" alt="" width="200" />
+  <img src="https://github.com/user-attachments/assets/b1ab07bd-bdde-466e-b353-682d30bcc6ce" alt="" width="200" />
+  <img src="https://github.com/user-attachments/assets/bc414cfe-a621-4c4f-bf93-cc08e43722ba" alt="" width="200" />
 
   ## iPad - screenshots
   
