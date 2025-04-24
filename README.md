@@ -21,8 +21,13 @@
   ## iPad - screenshots
   
   <img src="https://github.com/user-attachments/assets/6f3cac84-7958-4d14-82b5-3c565847076c" alt="" width="300" />
-  <img src="https://github.com/user-attachments/assets/eb50096d-2de9-42b1-809c-67f031787f05" alt="" width="300" />
-  <img src="https://github.com/user-attachments/assets/f53da376-4c23-48c6-824a-6dfa1ea269b5" alt="" width="300" />
-  <img src="https://github.com/user-attachments/assets/92f88cd1-1bbe-419a-9873-4d24c8ce87b7" alt="" width="300" />
-  
+  <img src="https://github.com/user-attachments/assets/cac34f79-aa0a-48da-b0c3-9377fbd8d906" alt="" width="300" />
+  <img src="https://github.com/user-attachments/assets/f1d07f16-d012-44b0-aaa6-183102edd722" alt="" width="300" />
+  <img src="https://github.com/user-attachments/assets/a8e60664-f1ef-40b9-95a9-bd8b6c7ea6b6" alt="" width="300" />
+  <img src="https://github.com/user-attachments/assets/737dfbec-16b7-428e-9e19-4a0c73295905" alt="" width="300" />
+  <img src="https://github.com/user-attachments/assets/b4809d14-0696-4ab3-9399-258c91b97858" alt="" width="300" />
+  <img src="https://github.com/user-attachments/assets/cd767ddd-addc-4463-8bae-bf7d1f7c0823" alt="" width="300" />
+
+
+
 
