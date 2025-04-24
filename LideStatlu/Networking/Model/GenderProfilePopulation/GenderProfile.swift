@@ -7,6 +7,6 @@
 
 import Foundation
 
-struct AgeProfile: Codable {
-    let attributes: AgeProfileAttributes
+struct GenderProfile: Codable {
+    let attributes: GenderProfileAttributes
 }

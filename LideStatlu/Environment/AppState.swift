@@ -14,10 +14,10 @@ let logger = Logger()
 class AppState: ObservableObject {
     // State
     @Published var ageStructures: [AgeStructure] = []
-    @Published var ageProfiles: [AgeProfile] = []
+    @Published var ageProfiles: [GenderProfile] = []
     @Published var localityNames: [Locality] = []
     @Published var filteredStructureData: AgeStructure?
-    @Published var filteredProfileData: AgeProfile?
+    @Published var filteredProfileData: GenderProfile?
     @Published var isLoading = true
     @Published var fetchError: FetchError = .noError
     @Published var isShowingErrorAlert: Bool = false
