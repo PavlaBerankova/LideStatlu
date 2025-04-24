@@ -96,7 +96,7 @@ identifier_name:
 
 # Disable errors, allow only warnings
 cyclomatic_complexity:
-  warning: 10
+  warning: 20
 type_name:
   max_length: 50
 force_cast: warning

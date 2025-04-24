@@ -12,7 +12,7 @@ let logger = Logger()
 
 @MainActor
 class AppState: ObservableObject {
-    // States
+    // State
     @Published var ageStructures: [AgeStructure] = []
     @Published var ageProfiles: [AgeProfile] = []
     @Published var localityNames: [Locality] = []
@@ -22,7 +22,7 @@ class AppState: ObservableObject {
     @Published var fetchError: FetchError = .noError
     @Published var isShowingErrorAlert: Bool = false
 
-    // Navigation states
+    // Navigation state
     @Published var isSheetPresented: Bool = false
     @Published var isPresentedFullScreenCover: Bool = false
 
